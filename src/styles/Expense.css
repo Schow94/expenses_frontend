@@ -1,0 +1,12 @@
+.one-day {
+  display: flex;
+  flex-direction: row;
+}
+
+td {
+  text-align: center;
+}
+
+tr:hover {
+  cursor: pointer;
+}
