@@ -1,0 +1,15 @@
+.signup-container {
+  margin-top: 4em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  margin: 1em;
+  padding: 1em;
+  border-radius: 5px;
+  width: 200px;
+  box-shadow: none;
+  border: 1px solid grey;
+}

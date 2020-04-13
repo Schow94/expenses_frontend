@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './styles/Login.css';
 
 export default class Login extends Component {
   handleChange = (e) => {
@@ -13,7 +14,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div>
+      <div className="login-container">
         <h3>Login</h3>
         <form onSubmit={this.handleSubmit}>
           <input

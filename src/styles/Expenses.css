@@ -22,3 +22,12 @@ td {
   font-size: 1.4em;
   border: 1px solid black;
 }
+
+.expenses-container {
+  margin-top: 7em;
+}
+
+.expenses-title {
+  text-align: center;
+  margin-bottom: 2em;
+}

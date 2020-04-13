@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Expense from './Expense';
+import AddExpenseForm from './AddExpenseForm';
 
 import './styles/Expenses.css';
 
@@ -9,11 +10,23 @@ export default class Expenses extends Component {
   componentDidUpdate() {}
 
   render() {
-    const { expenses } = this.props;
+    const {
+      expenses,
+      handleFormChange,
+      addExpense,
+      startDate,
+      setCalendar,
+    } = this.props;
 
     return (
-      <div>
-        <h1>Expenses</h1>
+      <div className="expenses-container">
+        <h1 className="expenses-title">Total Expenses</h1>
+        <AddExpenseForm
+          setCalendar={setCalendar}
+          startDate={startDate}
+          handleFormChange={handleFormChange}
+          addExpense={addExpense}
+        />
         <table>
           <thead>
             <tr>
@@ -39,7 +52,7 @@ export default class Expenses extends Component {
               return (
                 <Expense
                   key={val.id}
-                  time={val.created_at}
+                  time={val.expense_date}
                   id={val.id}
                   name={val.expense_name}
                   price={val.price}
