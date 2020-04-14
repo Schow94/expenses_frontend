@@ -3,10 +3,6 @@ import ExpenseApp from './ExpenseApp';
 
 export default class App extends Component {
   render() {
-    return (
-      <div>
-        <ExpenseApp />
-      </div>
-    );
+    return <ExpenseApp />;
   }
 }

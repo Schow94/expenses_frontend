@@ -9,4 +9,5 @@ td {
 
 tr:hover {
   cursor: pointer;
+  background-color: #f5f5f5;
 }

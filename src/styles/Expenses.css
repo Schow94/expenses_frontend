@@ -53,3 +53,49 @@ td {
 .toggle-off {
   background-color: rgb(0, 217, 255);
 }
+
+.edit-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.expense-edit-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.save-edit-btn {
+  background-color: green;
+  color: white;
+  display: inline-block;
+  width: 9%;
+  height: 3.2em;
+  border-radius: 4px;
+  font-size: 1em;
+  margin: 1em;
+}
+
+.save-edit-btn:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.toggle-edit-btn {
+  background-color: orange;
+  color: white;
+  display: inline-block;
+  width: 9%;
+  height: 3.2em;
+  border-radius: 4px;
+  font-size: 1em;
+  margin: 1em;
+}
+
+.toggle-edit-btn:hover {
+  color: black;
+  cursor: pointer;
+}

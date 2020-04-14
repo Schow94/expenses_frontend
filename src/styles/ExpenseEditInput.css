@@ -1,0 +1,31 @@
+.edit-input-row {
+  width: 100%;
+  font-size: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.edit-input {
+  margin: 0.4em;
+  font-size: 1.3em;
+  padding: 0.5em;
+  height: 1.5em;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+.delete-expense-btn {
+  background-color: red;
+  color: white;
+  display: inline-block;
+  width: 6%;
+  height: 2.8em;
+  border-radius: 4px;
+  font-size: 1.3em;
+}
+
+.delete-expense-btn:hover {
+  color: black;
+  cursor: pointer;
+}

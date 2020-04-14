@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
-
-import './styles/Expense.css';
+import Calendar from './Calendar';
+import './styles/ExpenseRow.css';
 
 export default class Expense extends Component {
   render() {
-    const { time, id, name, price, category, paid_to } = this.props;
+    const {
+      time,
+      id,
+      name,
+      price,
+      category,
+      paid_to,
+      toggleEditOn,
+    } = this.props;
     const convertedTime = new Date(time * 1000);
     const strDate = `${convertedTime}`.slice(4, 15);
+
     return (
-      <tr>
+      <tr className="expense-row">
         <td>{strDate}</td>
         <td>{name}</td>
         <td>{price}</td>

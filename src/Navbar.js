@@ -9,17 +9,21 @@ export default class Navbar extends Component {
   render() {
     const { currentUser } = this.props;
     return (
-      <ul className="nav-container">
-        <li className="nav-title">Expenses</li>
-        {currentUser ? (
-          <>
-            <p>Currently signed in as: {currentUser}</p>
-            <button className="logout-btn" onClick={this.handleLogout}>
-              Logout
-            </button>
-          </>
-        ) : null}
-      </ul>
+      <nav className="navbar">
+        <ul className="nav-list">
+          <li className="nav-title">Expenses</li>
+          {currentUser ? (
+            <>
+              <div className="logout-btn-container">
+                <p>Currently signed in as: {currentUser}</p>
+                <button className="logout-btn" onClick={this.handleLogout}>
+                  Logout
+                </button>
+              </div>
+            </>
+          ) : null}
+        </ul>
+      </nav>
     );
   }
 }

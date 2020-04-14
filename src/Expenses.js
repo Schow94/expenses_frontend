@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-import Expense from './Expense';
+import ExpenseRow from './ExpenseRow';
 import AddExpenseForm from './AddExpenseForm';
+import ExpenseEditInput from './ExpenseEditInput';
 import Graph1 from './Graph1';
 
 import './styles/Expenses.css';
@@ -11,6 +12,7 @@ export default class Expenses extends Component {
     super(props);
     this.state = {
       toggleAddExpense: false,
+      toggleEditOn: false,
     };
   }
 
@@ -18,6 +20,13 @@ export default class Expenses extends Component {
     this.setState({
       toggleAddExpense: !this.state.toggleAddExpense,
     });
+  };
+
+  toggleEditForm = () => {
+    this.setState({
+      toggleEditOn: !this.state.toggleEditOn,
+    });
+    console.log(this.state.toggleEditOn);
   };
 
   componentDidMount() {}
@@ -48,7 +57,9 @@ export default class Expenses extends Component {
     return (
       <div className="expenses-container">
         <h1 className="expenses-title">Total Expenses: ${totalPrice}</h1>
-
+        <button className="toggle-edit-btn" onClick={this.toggleEditForm}>
+          {!this.state.toggleEditOn ? `EDIT` : `Go Back`}
+        </button>
         {toggleAddExpense ? (
           <>
             <button
@@ -76,50 +87,71 @@ export default class Expenses extends Component {
             onClick={this.toggleAddForm}
             className="toggle-add-expense-btn toggle-off"
           >
-            Add a new expense
+            Add Expense
           </button>
-          )}
-        
+        )}
+
         {/* <Graph1
           graphData={expenses}
         /> */}
 
-        <table>
-          <thead>
-            <tr>
-              <th>
-                <div className="table-header">Date</div>
-              </th>
-              <th>
-                <div className="table-header">Expense</div>
-              </th>
-              <th>
-                <div className="table-header">Price</div>
-              </th>
-              <th>
-                <div className="table-header">Category</div>
-              </th>
-              <th>
-                <div className="table-header">Paid To</div>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {expenses.map((val) => {
-              return (
-                <Expense
-                  key={val.id}
-                  time={val.expense_date}
-                  id={val.id}
-                  name={val.expense_name}
-                  price={val.price}
-                  category={val.category}
-                  paid_to={val.paid_to}
-                />
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="edit-container">
+          {!this.state.toggleEditOn ? (
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    <div className="table-header">Date</div>
+                  </th>
+                  <th>
+                    <div className="table-header">Expense</div>
+                  </th>
+                  <th>
+                    <div className="table-header">Price</div>
+                  </th>
+                  <th>
+                    <div className="table-header">Category</div>
+                  </th>
+                  <th>
+                    <div className="table-header">Paid To</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {expenses.map((val) => {
+                  return (
+                    <ExpenseRow
+                      key={val.id}
+                      time={val.expense_date}
+                      id={val.id}
+                      name={val.expense_name}
+                      price={val.price}
+                      category={val.category}
+                      paid_to={val.paid_to}
+                    />
+                  );
+                })}
+              </tbody>
+            </table>
+          ) : (
+            <form className="expense-edit-form">
+              <button className="save-edit-btn">Save Changes</button>
+              {expenses.map((val) => {
+                return (
+                  <ExpenseEditInput
+                    key={val.id}
+                    time={val.expense_date}
+                    id={val.id}
+                    name={val.expense_name}
+                    price={val.price}
+                    category={val.category}
+                    paid_to={val.paid_to}
+                  />
+                );
+              })}
+            </form>
+          )}
+        </div>
       </div>
     );
   }

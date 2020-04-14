@@ -218,7 +218,7 @@ export default class ExpenseApp extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <Navbar currentUser={this.state.currentUser} logout={this.logout} />
         {this.state.currentUser ? (
           <Expenses
@@ -241,7 +241,7 @@ export default class ExpenseApp extends Component {
             />
           </>
         )}
-      </div>
+      </>
     );
   }
 }
