@@ -6,6 +6,7 @@ li {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
   background-color: black;
   color: white;
   top: 0;
@@ -15,6 +16,10 @@ li {
   position: absolute;
   width: 100vw;
   min-height: 3em;
+}
+
+.nav-container li:hover {
+  color: #18baf5;
 }
 
 .logout-btn {
@@ -27,6 +32,12 @@ li {
 }
 
 .logout-btn:hover {
-  background-color: blue;
+  background-color: red;
   color: white;
+  cursor: pointer;
+}
+
+.nav-title {
+  font-size: 2em;
+  float: left;
 }

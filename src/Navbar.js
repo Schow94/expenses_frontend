@@ -10,7 +10,7 @@ export default class Navbar extends Component {
     const { currentUser } = this.props;
     return (
       <ul className="nav-container">
-        <li>Expenses</li>
+        <li className="nav-title">Expenses</li>
         {currentUser ? (
           <>
             <p>Currently signed in as: {currentUser}</p>

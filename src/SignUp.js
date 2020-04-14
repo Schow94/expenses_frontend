@@ -17,7 +17,7 @@ export default class SignUp extends Component {
     return (
       <div className="signup-container">
         <h3>Sign Up</h3>
-        <form onSubmit={this.handleSubmit}>
+        <form className="signup-form" onSubmit={this.handleSubmit}>
           <input
             type="text"
             placeholder="Enter an email"
@@ -42,7 +42,7 @@ export default class SignUp extends Component {
             name="password"
             value={this.props.password}
           ></input>
-          <button>Submit</button>
+          <button className="signup-btn">Submit</button>
         </form>
       </div>
     );

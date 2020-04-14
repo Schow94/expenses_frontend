@@ -1,0 +1,48 @@
+.addExpense-container {
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+}
+
+.add-expense-form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.add-expense-form input {
+  margin: 1em;
+  padding: 1em;
+  font-size: 1em;
+  border-radius: 5px;
+  width: 40%;
+  box-shadow: none;
+  border: 1px solid grey;
+}
+
+.calendar-container {
+  display: block;
+  width: 100%;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.add-expense-btn {
+  display: block;
+  width: 9%;
+  height: 3.5em;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 1.2em;
+  margin-top: 1em;
+  background-color: #18baf5;
+  border: none;
+}
+
+.add-expense-btn:hover {
+  background-color: #16a8dd;
+  color: white;
+}

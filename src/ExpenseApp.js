@@ -23,6 +23,7 @@ export default class ExpenseApp extends Component {
       category: '',
       paid_to: '',
       startDate: new Date(),
+      graphData: [],
     };
   }
 
@@ -89,8 +90,6 @@ export default class ExpenseApp extends Component {
         expenses: [...result.data],
         startDate: new Date(),
       });
-
-      console.log('expenses: ', this.state.expenses);
     } catch (e) {
       console.log(e);
     }
@@ -155,7 +154,9 @@ export default class ExpenseApp extends Component {
         },
         headers: { Authorization: `Bearer ${token}` },
       });
+
       this.getExpenses();
+
       //Clear inputs after adding expense
       this.setState({
         expense_name: '',
@@ -203,6 +204,18 @@ export default class ExpenseApp extends Component {
     });
   };
 
+  formatGraphData = () => {
+    const data = this.state.expenses.map((val) => {
+      return val;
+    });
+
+    console.log(data);
+
+    this.setState({
+      graphData: '',
+    });
+  };
+
   render() {
     return (
       <div>
@@ -214,6 +227,10 @@ export default class ExpenseApp extends Component {
             addExpense={this.addExpense}
             startDate={this.state.startDate}
             setCalendar={this.setCalendar}
+            expense_name={this.state.expense_name}
+            price={this.state.price}
+            category={this.state.category}
+            paid_to={this.state.paid_to}
           />
         ) : (
           <>

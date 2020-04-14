@@ -16,7 +16,7 @@ export default class Login extends Component {
     return (
       <div className="login-container">
         <h3>Login</h3>
-        <form onSubmit={this.handleSubmit}>
+        <form className="login-form" onSubmit={this.handleSubmit}>
           <input
             autoComplete="off"
             onChange={(e) => this.handleChange(e)}
@@ -33,7 +33,7 @@ export default class Login extends Component {
             name="password"
             value={this.props.password}
           ></input>
-          <button>Login</button>
+          <button className="login-btn">Login</button>
         </form>
       </div>
     );
