@@ -24,6 +24,8 @@ td {
 
 .expenses-container {
   margin-top: 5em;
+  margin-bottom: 1em;
+  padding-bottom: 2em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,6 +45,7 @@ td {
 
 .toggle-add-expense-btn:hover {
   cursor: pointer;
+  color: white;
 }
 
 .toggle-on {
@@ -85,7 +88,7 @@ td {
 }
 
 .toggle-edit-btn {
-  background-color: orange;
+  background-color: purple;
   color: white;
   display: inline-block;
   width: 9%;

@@ -18,17 +18,23 @@ export default class ExpenseApp extends Component {
       password: '',
       expenses: [],
       currentUser: '',
+      startDate: new Date(),
       expense_name: '',
       price: '',
       category: '',
       paid_to: '',
-      startDate: new Date(),
       graphData: [],
+      toggleAddExpense: false,
+      toggleEditOn: false,
+      year: 2020,
+      month: 'April',
+      day: 15,
     };
   }
 
   componentDidMount() {
     console.log('Component Mounted');
+    console.log(this.state.expenses);
 
     try {
       const token = JSON.parse(localStorage.getItem('token'));
@@ -73,6 +79,14 @@ export default class ExpenseApp extends Component {
 
   handleFormChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
+
+    console.log(
+      this.state.startDate,
+      this.state.expense_name,
+      this.state.price,
+      this.state.category,
+      this.state.paid_to
+    );
   };
 
   getExpenses = async () => {
@@ -131,6 +145,7 @@ export default class ExpenseApp extends Component {
   logout = () => {
     this.setState({
       currentUser: '',
+      toggleAddExpense: false,
     });
     localStorage.removeItem('token');
 
@@ -155,10 +170,13 @@ export default class ExpenseApp extends Component {
         headers: { Authorization: `Bearer ${token}` },
       });
 
+      console.log(this.state.startDate);
+
       this.getExpenses();
 
       //Clear inputs after adding expense
       this.setState({
+        toggleAddExpense: false,
         expense_name: '',
         price: '',
         category: '',
@@ -202,6 +220,7 @@ export default class ExpenseApp extends Component {
     this.setState({
       startDate: date,
     });
+    console.log(this.state.startDate);
   };
 
   formatGraphData = () => {
@@ -214,6 +233,155 @@ export default class ExpenseApp extends Component {
     this.setState({
       graphData: '',
     });
+  };
+
+  deleteExpense = async (expenseId) => {
+    try {
+      const token = JSON.parse(localStorage.getItem('token'));
+
+      const result = await axios({
+        method: 'delete',
+        url: `http://localhost:5000/expenses/${expenseId}`,
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log(expenseId);
+
+      this.getExpenses();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  toggleAddForm = () => {
+    this.setState({
+      toggleAddExpense: !this.state.toggleAddExpense,
+    });
+  };
+
+  toggleEditForm = () => {
+    this.setState({
+      toggleEditOn: !this.state.toggleEditOn,
+    });
+  };
+
+  //EDIT EXPENSE NAME
+  editExpenseName = async (expenseId, expenseName) => {
+    try {
+      const token = JSON.parse(localStorage.getItem('token'));
+
+      const result = await axios({
+        method: 'patch',
+        url: `http://localhost:5000/expenses/${expenseId}`,
+        data: {
+          expense_name: expenseName,
+        },
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log(expenseId, expenseName);
+
+      this.getExpenses();
+
+      //Clear inputs after adding expense
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  editExpensePrice = async (expenseId, price) => {
+    try {
+      const token = JSON.parse(localStorage.getItem('token'));
+
+      const result = await axios({
+        method: 'patch',
+        url: `http://localhost:5000/expenses/${expenseId}`,
+        data: {
+          price: price,
+        },
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log(expenseId, price);
+
+      this.getExpenses();
+
+      //Clear inputs after adding expense
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  editExpenseCategory = async (expenseId, category) => {
+    try {
+      const token = JSON.parse(localStorage.getItem('token'));
+
+      const result = await axios({
+        method: 'patch',
+        url: `http://localhost:5000/expenses/${expenseId}`,
+        data: {
+          category: category,
+        },
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log(expenseId, category);
+
+      this.getExpenses();
+
+      //Clear inputs after adding expense
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  editExpensePaidTo = async (expenseId, paid_to) => {
+    try {
+      const token = JSON.parse(localStorage.getItem('token'));
+
+      const result = await axios({
+        method: 'patch',
+        url: `http://localhost:5000/expenses/${expenseId}`,
+        data: {
+          paid_to: paid_to,
+        },
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log(expenseId, paid_to);
+
+      this.getExpenses();
+
+      //Clear inputs after adding expense
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  //This code is not executing
+  editExpenseDate = async (expenseId, time) => {
+    //Time is correct up here
+    console.log(expenseId, time);
+    try {
+      const token = JSON.parse(localStorage.getItem('token'));
+
+      //Something is getting blocked here
+      const result = await axios({
+        method: 'patch',
+        url: `http://localhost:5000/expenses/${expenseId}`,
+        data: {
+          expense_date: time.getTime() / 1000,
+        },
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      // console.log(time);
+
+      this.getExpenses();
+
+      //Clear inputs after adding expense
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   render() {
@@ -231,6 +399,16 @@ export default class ExpenseApp extends Component {
             price={this.state.price}
             category={this.state.category}
             paid_to={this.state.paid_to}
+            deleteExpense={this.deleteExpense}
+            toggleAddForm={this.toggleAddForm}
+            toggleEditForm={this.toggleEditForm}
+            toggleAddExpense={this.state.toggleAddExpense}
+            toggleEditOn={this.state.toggleEditOn}
+            editExpenseName={this.editExpenseName}
+            editExpensePrice={this.editExpensePrice}
+            editExpenseCategory={this.editExpenseCategory}
+            editExpensePaidTo={this.editExpensePaidTo}
+            editExpenseDate={this.editExpenseDate}
           />
         ) : (
           <>

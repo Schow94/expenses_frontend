@@ -2,33 +2,12 @@ import React, { Component } from 'react';
 
 import ExpenseRow from './ExpenseRow';
 import AddExpenseForm from './AddExpenseForm';
-import ExpenseEditInput from './ExpenseEditInput';
+import YearSelector from './YearSelector';
 import Graph1 from './Graph1';
 
 import './styles/Expenses.css';
 
 export default class Expenses extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      toggleAddExpense: false,
-      toggleEditOn: false,
-    };
-  }
-
-  toggleAddForm = () => {
-    this.setState({
-      toggleAddExpense: !this.state.toggleAddExpense,
-    });
-  };
-
-  toggleEditForm = () => {
-    this.setState({
-      toggleEditOn: !this.state.toggleEditOn,
-    });
-    console.log(this.state.toggleEditOn);
-  };
-
   componentDidMount() {}
 
   componentDidUpdate() {}
@@ -44,9 +23,17 @@ export default class Expenses extends Component {
       price,
       category,
       paid_to,
+      deleteExpense,
+      toggleAddExpense,
+      toggleEditOn,
+      toggleAddForm,
+      toggleEditForm,
+      editExpenseName,
+      editExpensePrice,
+      editExpenseCategory,
+      editExpensePaidTo,
+      editExpenseDate,
     } = this.props;
-
-    const { toggleAddExpense } = this.state;
 
     //Might be easier to do this on the backend in postgres
 
@@ -57,13 +44,10 @@ export default class Expenses extends Component {
     return (
       <div className="expenses-container">
         <h1 className="expenses-title">Total Expenses: ${totalPrice}</h1>
-        <button className="toggle-edit-btn" onClick={this.toggleEditForm}>
-          {!this.state.toggleEditOn ? `EDIT` : `Go Back`}
-        </button>
         {toggleAddExpense ? (
           <>
             <button
-              onClick={this.toggleAddForm}
+              onClick={toggleAddForm}
               className="toggle-add-expense-btn toggle-on"
             >
               Go Back
@@ -79,78 +63,70 @@ export default class Expenses extends Component {
               category={category}
               paid_to={paid_to}
               toggleAddExpense={toggleAddExpense}
-              toggleAddForm={this.toggleAddForm}
+              toggleAddForm={toggleAddForm}
             />
           </>
         ) : (
           <button
-            onClick={this.toggleAddForm}
+            onClick={toggleAddForm}
             className="toggle-add-expense-btn toggle-off"
           >
-            Add Expense
+            Add New Expense
           </button>
         )}
+
+        <YearSelector />
 
         {/* <Graph1
           graphData={expenses}
         /> */}
 
         <div className="edit-container">
-          {!this.state.toggleEditOn ? (
-            <table>
-              <thead>
-                <tr>
-                  <th>
-                    <div className="table-header">Date</div>
-                  </th>
-                  <th>
-                    <div className="table-header">Expense</div>
-                  </th>
-                  <th>
-                    <div className="table-header">Price</div>
-                  </th>
-                  <th>
-                    <div className="table-header">Category</div>
-                  </th>
-                  <th>
-                    <div className="table-header">Paid To</div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {expenses.map((val) => {
-                  return (
-                    <ExpenseRow
-                      key={val.id}
-                      time={val.expense_date}
-                      id={val.id}
-                      name={val.expense_name}
-                      price={val.price}
-                      category={val.category}
-                      paid_to={val.paid_to}
-                    />
-                  );
-                })}
-              </tbody>
-            </table>
-          ) : (
-            <form className="expense-edit-form">
-              <button className="save-edit-btn">Save Changes</button>
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  <div className="table-header">Date</div>
+                </th>
+                <th>
+                  <div className="table-header">Expense</div>
+                </th>
+                <th>
+                  <div className="table-header">Price</div>
+                </th>
+                <th>
+                  <div className="table-header">Category</div>
+                </th>
+                <th>
+                  <div className="table-header">Paid To</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
               {expenses.map((val) => {
                 return (
-                  <ExpenseEditInput
+                  <ExpenseRow
                     key={val.id}
                     time={val.expense_date}
                     id={val.id}
-                    name={val.expense_name}
+                    expense_name={val.expense_name}
                     price={val.price}
                     category={val.category}
                     paid_to={val.paid_to}
+                    startDate={startDate}
+                    setCalendar={setCalendar}
+                    deleteExpense={deleteExpense}
+                    handleFormChange={handleFormChange}
+                    editExpenseName={editExpenseName}
+                    editExpensePrice={editExpensePrice}
+                    editExpenseCategory={editExpenseCategory}
+                    editExpensePaidTo={editExpensePaidTo}
+                    editExpenseDate={editExpenseDate}
                   />
                 );
               })}
-            </form>
-          )}
+            </tbody>
+          </table>
         </div>
       </div>
     );

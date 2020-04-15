@@ -6,7 +6,7 @@
   justify-content: center;
 }
 
-.edit-input {
+input {
   margin: 0.4em;
   font-size: 1.3em;
   padding: 0.5em;
@@ -28,4 +28,14 @@
 .delete-expense-btn:hover {
   color: black;
   cursor: pointer;
+}
+
+.calendar-container {
+  display: block;
+  width: 10%;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+  margin: 0;
 }

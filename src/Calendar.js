@@ -7,7 +7,7 @@ import './styles/Calendar.css';
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
-export default class Example extends Component {
+export default class Calendar extends Component {
   handleChange = (date) => {
     this.props.setCalendar(date);
   };

@@ -52,6 +52,10 @@ li {
   align-items: center;
 }
 
+.nav-title:hover {
+  cursor: pointer;
+}
+
 /* ------------------------------ MEDIA QUERIES ------------------------------- */
 @media only screen and (max-width: 300px) {
   .navbar {
