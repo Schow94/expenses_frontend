@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import ExpenseRow from './ExpenseRow';
 import AddExpenseForm from './AddExpenseForm';
 import YearSelector from './YearSelector';
+import MonthSelector from './MonthSelector';
+import DaySelector from './DaySelector';
 import Graph1 from './Graph1';
 
 import './styles/Expenses.css';
@@ -33,6 +35,13 @@ export default class Expenses extends Component {
       editExpenseCategory,
       editExpensePaidTo,
       editExpenseDate,
+      year,
+      getYearExpenses,
+      month,
+      getMonthExpenses,
+      day,
+      getDayExpenses,
+      graphData,
     } = this.props;
 
     //Might be easier to do this on the backend in postgres
@@ -75,11 +84,16 @@ export default class Expenses extends Component {
           </button>
         )}
 
-        <YearSelector />
-
-        {/* <Graph1
-          graphData={expenses}
-        /> */}
+        <div className="selector-container">
+          <YearSelector year={year} getYearExpenses={getYearExpenses} />
+          {year !== 'ALL' ? (
+            <MonthSelector month={month} getMonthExpenses={getMonthExpenses} />
+          ) : null}
+          {year !== 'ALL' && month !== 'ALL' ? (
+            <DaySelector day={day} getDayExpenses={getDayExpenses} />
+          ) : null}
+        </div>
+        <Graph1 graphData={graphData} />
 
         <div className="edit-container">
           <table>

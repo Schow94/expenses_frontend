@@ -1,0 +1,9 @@
+.month-selector {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+}
+
+.select {
+  margin-top: 1em;
+}

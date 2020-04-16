@@ -72,6 +72,7 @@ export default class Expense extends Component {
       toggleEditOn,
       startDate,
       setCalendar,
+      
     } = this.props;
 
     return (

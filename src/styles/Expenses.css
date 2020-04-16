@@ -102,3 +102,9 @@ td {
   color: black;
   cursor: pointer;
 }
+
+.selector-container {
+  margin: 1em;
+  display: flex;
+  flex-direction: row;
+}

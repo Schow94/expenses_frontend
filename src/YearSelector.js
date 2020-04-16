@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-// import './styles/ItemToShowOnGraph.css';
-
+import './styles/YearSelector.css';
 export default class YearSelector extends Component {
   handleChange = (e) => {
-    this.props.onGraphChange(e.target.value);
+    // e.preventDefault();
+    this.props.getYearExpenses(e.target.value);
+    // console.log(e.target.value);
   };
 
   render() {
-    const { graphSelected } = this.props;
+    const { year } = this.props;
     return (
-      <div className="graph-params">
-        <label htmlFor="graphParam">Year:</label>
+      <div className="year-selector">
+        <label htmlFor="year">Year:</label>
         <select
           className="select"
-          id="graphParam"
-          value={graphSelected}
+          id="year"
+          value={year}
           onChange={(e) => this.handleChange(e)}
         >
           <option value="ALL">ALL</option>

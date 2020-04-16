@@ -16,23 +16,22 @@ import {
 
 export default class Graph1 extends Component {
   render() {
-    const { expenses } = this.props;
-
-
+    const { graphData } = this.props;
+    console.log(graphData);
     return (
       <ResponsiveContainer className="graph-container" width="80%" height={400}>
         <LineChart
-          data={expenses}
+          data={graphData}
           margin={{ top: 20, right: 10, left: 20, bottom: 80 }}
         >
           <XAxis
-            dataKey="created_at"
-            interval={20}
+            dataKey="date"
+            // interval={20}
             tick={{ fill: 'black', fontSize: 13 }}
             stroke="black"
           >
             <Label
-              value="created_at"
+              value="date"
               offset={1}
               position="insideBottom"
               dy={20}
@@ -59,9 +58,9 @@ export default class Graph1 extends Component {
           <Tooltip />
           {/* <CartesianGrid stroke="#ccc" /> */}
           <Line
-            dot={false}
+            dot={true}
             type="monotone"
-            // dataKey={graphSelected}
+            dataKey="price"
             stroke="black"
             activeDot={{ r: 5 }}
           />

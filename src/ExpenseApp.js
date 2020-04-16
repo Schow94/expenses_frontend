@@ -26,9 +26,10 @@ export default class ExpenseApp extends Component {
       graphData: [],
       toggleAddExpense: false,
       toggleEditOn: false,
-      year: 2020,
-      month: 'April',
-      day: 15,
+      year: 'ALL',
+      month: 'ALL',
+      day: 'ALL',
+      graphData: [],
     };
   }
 
@@ -50,7 +51,6 @@ export default class ExpenseApp extends Component {
   componentDidUpdate() {
     console.log('Component Updated');
     //Convert Date obj to unix for db
-    // console.log(this.state.startDate.getTime() / 1000);
   }
 
   getCurrentUser = () => {
@@ -100,10 +100,156 @@ export default class ExpenseApp extends Component {
         headers: { Authorization: `Bearer ${token}` },
       });
 
+      const prices = result.data.map((val) => {
+        const obj = {};
+        const date = new Date(val.expense_date * 1000);
+
+        obj['price'] = Number(val.price);
+        obj['date'] = `${date}`.slice(0, 15);
+        return obj;
+      });
+
       this.setState({
+        graphData: [...prices],
         expenses: [...result.data],
         startDate: new Date(),
       });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  //Get all expenses for a particular year
+  getYearExpenses = async (year) => {
+    console.log('GETTING YEARLY EXPENSES for:', year);
+    try {
+      const token = JSON.parse(localStorage.getItem('token'));
+
+      if (year === 'ALL') {
+        const result = await axios({
+          method: 'get',
+          url: `http://localhost:5000/expenses`,
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const prices = result.data.map((val) => {
+          const obj = {};
+          const date = new Date(val.expense_date * 1000);
+
+          obj['price'] = Number(val.price);
+          obj['date'] = `${date}`.slice(0, 15);
+          return obj;
+        });
+
+        this.setState({
+          graphData: [...prices],
+          year: year,
+          expenses: [...result.data],
+          startDate: new Date(),
+        });
+      } else {
+        const result = await axios({
+          method: 'get',
+          url: `http://localhost:5000/expenses/${year}`,
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const prices = result.data.map((val) => {
+          const obj = {};
+          const date = new Date(val.expense_date * 1000);
+
+          obj['price'] = Number(val.price);
+          obj['date'] = `${date}`.slice(0, 15);
+          return obj;
+        });
+
+        this.setState({
+          graphData: [...prices],
+          year: year,
+          expenses: [...result.data],
+          startDate: new Date(),
+        });
+
+        console.log(result);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  getMonthExpenses = async (month) => {
+    console.log('GETTING YEARLY EXPENSES for:', month);
+    try {
+      const token = JSON.parse(localStorage.getItem('token'));
+
+      if (month === 'ALL') {
+        const result = await axios({
+          method: 'get',
+          url: `http://localhost:5000/expenses/${this.state.year}`,
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        this.setState({
+          month: month,
+          expenses: [...result.data],
+          startDate: new Date(),
+        });
+
+        console.log(result);
+      } else {
+        const result = await axios({
+          method: 'get',
+          url: `http://localhost:5000/expenses/${this.state.year}/${month}`,
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        this.setState({
+          month: month,
+          expenses: [...result.data],
+          startDate: new Date(),
+        });
+
+        console.log(result);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  getDayExpenses = async (day) => {
+    console.log('GETTING daily EXPENSES for:', day);
+    try {
+      const token = JSON.parse(localStorage.getItem('token'));
+
+      if (day === 'ALL') {
+        const result = await axios({
+          method: 'get',
+          url: `http://localhost:5000/expenses/${this.state.year}/${this.state.month}`,
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        this.setState({
+          day: day,
+          expenses: [...result.data],
+          startDate: new Date(),
+        });
+
+        console.log(result);
+      } else {
+        const result = await axios({
+          method: 'get',
+          url: `http://localhost:5000/expenses/${this.state.year}/${this.state.month}/${day}`,
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        this.setState({
+          day: day,
+          expenses: [...result.data],
+          startDate: new Date(),
+        });
+
+        console.log(result);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -409,6 +555,13 @@ export default class ExpenseApp extends Component {
             editExpenseCategory={this.editExpenseCategory}
             editExpensePaidTo={this.editExpensePaidTo}
             editExpenseDate={this.editExpenseDate}
+            year={this.state.year}
+            getYearExpenses={this.getYearExpenses}
+            month={this.state.month}
+            getMonthExpenses={this.getMonthExpenses}
+            day={this.state.day}
+            getDayExpenses={this.getDayExpenses}
+            graphData={this.state.graphData}
           />
         ) : (
           <>
