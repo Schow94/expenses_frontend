@@ -15,7 +15,7 @@ export default class Login extends Component {
   render() {
     return (
       <div className="login-container">
-        <h3>Login</h3>
+        <h3 className="login-title">Login</h3>
         <form className="login-form" onSubmit={this.handleSubmit}>
           <input
             autoComplete="off"

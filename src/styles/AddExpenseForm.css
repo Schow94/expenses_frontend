@@ -45,27 +45,110 @@
 .add-expense-btn:hover {
   background-color: #16a8dd;
   color: white;
+  cursor: pointer;
 }
 
 /* ------------------------------ MEDIA QUERIES ------------------------------- */
 @media only screen and (max-width: 300px) {
   .add-expense-btn {
-    display: block;
     width: 50px;
     height: 3.5em;
-    border-radius: 4px;
-    text-align: center;
     font-size: 0.6em;
     margin-top: 1em;
-    background-color: #18baf5;
-    border: none;
+  }
+  .add-expense-btn {
+    width: 100px;
+    height: 3.5em;
+    font-size: 0.9em;
+    margin-top: 1em;
+  }
+  .addExpense-container {
+    width: 100%;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .add-expense-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 1.5em;
+  }
+
+  .add-expense-form input {
+    margin: 1em;
+    padding: 1em;
+    font-size: 1em;
+    border-radius: 5px;
+    width: 80%;
+    box-shadow: none;
+    border: 1px solid grey;
   }
 }
 
 @media only screen and (min-width: 300px) and (max-width: 450px) {
+  .add-expense-btn {
+    width: 100px;
+    height: 3.5em;
+    font-size: 0.9em;
+    margin-top: 1em;
+  }
+  .addExpense-container {
+    width: 100%;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .add-expense-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 1.5em;
+  }
+
+  .add-expense-form input {
+    margin: 1em;
+    padding: 1em;
+    font-size: 1em;
+    border-radius: 5px;
+    width: 80%;
+    box-shadow: none;
+    border: 1px solid grey;
+  }
 }
 
 @media only screen and (min-width: 450px) and (max-width: 650px) {
+  .add-expense-btn {
+    width: 120px;
+    height: 3.5em;
+    font-size: 1.2em;
+    margin-top: 1em;
+  }
+  .addExpense-container {
+    width: 100%;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .add-expense-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 1.5em;
+  }
+
+  .add-expense-form input {
+    margin: 1em;
+    padding: 1em;
+    font-size: 1em;
+    border-radius: 5px;
+    width: 60%;
+    box-shadow: none;
+    border: 1px solid grey;
+  }
 }
 
 @media only screen and (min-width: 650px) and (max-width: 800px) {

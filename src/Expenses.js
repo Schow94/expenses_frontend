@@ -158,14 +158,13 @@ export default class Expenses extends Component {
         )}
 
         <div className="analytics-container">
-          <ul>
+          <ul className="category-breakdown">
             {catNames.map((x, idx) => {
               return (
                 <li
+                  className="category-list-item"
                   style={{
                     color: COLORS[idx],
-                    fontSize: '20px',
-                    margin: '1em',
                   }}
                   key={idx}
                 >{`${x}: $${catPrices[idx].toFixed(2)} (${(
@@ -178,13 +177,13 @@ export default class Expenses extends Component {
 
           {/* Move pie chart to its own component */}
           <div className="pie-graph-container">
-            <ResponsiveContainer width="100%" height={200}>
+            <ResponsiveContainer width="100%" aspect={1.5}>
               <PieChart>
                 <Pie
                   data={catArr}
                   dataKey="price"
                   nameKey="price"
-                  // outerRadius={100}
+                  // outerRadius="100%"
                   fill="blue"
                   label
                 >

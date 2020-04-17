@@ -16,7 +16,7 @@ export default class SignUp extends Component {
   render() {
     return (
       <div className="signup-container">
-        <h3>Sign Up</h3>
+        <h3 className="signup-title">Sign Up</h3>
         <form className="signup-form" onSubmit={this.handleSubmit}>
           <input
             type="text"
