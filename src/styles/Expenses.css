@@ -113,9 +113,7 @@ td {
 }
 
 .graph-table-container {
-  /* display: flex;
-  flex-direction: row;
-  justify-content: space-between; */
+  width: 100vw;
 }
 
 .graph-container {
@@ -123,6 +121,8 @@ td {
 }
 
 .pie-graph-container {
+  width: 100%;
+  /* background-color: orange; */
 }
 
 .analytics-container {
@@ -130,4 +130,111 @@ td {
   flex-direction: row;
   margin-top: 2em;
   margin-bottom: 2em;
+}
+
+/* ------------------------------ MEDIA QUERIES ------------------------------- */
+@media only screen and (max-width: 300px) {
+  .expenses-container {
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    padding-bottom: 2em;
+    font-size: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: purple; */
+    width: 100vw;
+  }
+  .analytics-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+  }
+
+  .pie-graph-container {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .graph-table-container {
+    width: 100vw;
+  }
+
+  .graph-container {
+    width: 80%;
+    margin-left: 5%;
+    margin-bottom: 2em;
+  }
+  .edit-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /* font-size: 8px; */
+    /* background-color: blue; */
+  }
+
+  .graph-table-container {
+    /* background-color: blue; */
+    width: 100vw;
+  }
+
+  table {
+    /* position: relative; */
+    margin-top: 30px;
+    width: 100%;
+    font-size: 1px;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  tr {
+    /* width: 40%; */
+  }
+  .table-header {
+    font-size: 1.4em;
+  }
+
+  th {
+    border: 1px solid black;
+    background-color: grey;
+  }
+
+  td {
+    font-size: 1em;
+    padding: 0;
+    border: 1px solid black;
+  }
+  .toggle-add-expense-btn {
+    width: 55px;
+    height: 3.5em;
+    font-size: 8px;
+    margin-top: 1em;
+  }
+  .expenses-title {
+    text-align: center;
+    margin-top: 2em;
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 450px) {
+}
+
+@media only screen and (min-width: 450px) and (max-width: 650px) {
+}
+
+@media only screen and (min-width: 650px) and (max-width: 800px) {
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1000px) {
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1300px) {
+}
+
+@media only screen and (min-width: 1300px) and (max-width: 1500px) {
+}
+
+@media only screen and (min-width: 1500px) {
 }

@@ -46,3 +46,53 @@ tr:hover {
   width: 100%;
   margin: 0;
 }
+
+@media only screen and (max-width: 300px) {
+  .expense-row {
+    width: 100%;
+    /* background-color: green; */
+    font-size: 1px;
+    /* margin: 0; */
+  }
+  input {
+    font-size: 1em;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  td {
+    width: 30px;
+  }
+  .delete-expense-btn {
+    background-color: red;
+    color: black;
+    display: inline-block;
+    width: 30px;
+    height: 10px;
+    /* padding: 20%; */
+    border-radius: 4px;
+    /* font-size: 1em; */
+    border: none;
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 450px) {
+}
+
+@media only screen and (min-width: 450px) and (max-width: 650px) {
+}
+
+@media only screen and (min-width: 650px) and (max-width: 800px) {
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1000px) {
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1300px) {
+}
+
+@media only screen and (min-width: 1300px) and (max-width: 1500px) {
+}
+
+@media only screen and (min-width: 1500px) {
+}

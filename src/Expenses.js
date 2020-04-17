@@ -7,7 +7,7 @@ import MonthSelector from './MonthSelector';
 import DaySelector from './DaySelector';
 import Graph1 from './Graph1';
 
-import { PieChart, Pie, Cell } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 import './styles/Expenses.css';
 
@@ -46,8 +46,7 @@ export default class Expenses extends Component {
       graphData,
     } = this.props;
 
-    //Might be easier to do this on the backend in postgres
-
+    //Move this logic to main ExpenseApp.js & save to state
     const totalPrice = expenses
       .reduce((acc, curr) => {
         return acc + Number(curr.price);
@@ -176,23 +175,25 @@ export default class Expenses extends Component {
               );
             })}
           </ul>
+
+          {/* Move pie chart to its own component */}
           <div className="pie-graph-container">
-            <PieChart width={550} height={500}>
-              <Pie
-                data={catArr}
-                dataKey="price"
-                nameKey="price"
-                cx="50%"
-                cy="50%"
-                outerRadius={200}
-                fill="blue"
-                label
-              >
-                {catArr.map((entry, idx) => (
-                  <Cell fill={COLORS[idx % COLORS.length]} key={idx} />
-                ))}
-              </Pie>
-            </PieChart>
+            <ResponsiveContainer width="100%" height={200}>
+              <PieChart>
+                <Pie
+                  data={catArr}
+                  dataKey="price"
+                  nameKey="price"
+                  // outerRadius={100}
+                  fill="blue"
+                  label
+                >
+                  {catArr.map((entry, idx) => (
+                    <Cell fill={COLORS[idx % COLORS.length]} key={idx} />
+                  ))}
+                </Pie>
+              </PieChart>
+            </ResponsiveContainer>
           </div>
         </div>
 
@@ -208,7 +209,9 @@ export default class Expenses extends Component {
 
         <div className="graph-table-container">
           <div className="graph-container">
-            <Graph1 graphData={graphData} />
+            <ResponsiveContainer width="100%" height={300}>
+              <Graph1 graphData={graphData} />
+            </ResponsiveContainer>
           </div>
           <div className="edit-container">
             <table>
