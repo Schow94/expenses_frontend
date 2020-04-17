@@ -11,7 +11,7 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar">
         <ul className="nav-list">
-          <li className="nav-title">Expenses</li>
+          <li className="nav-title">Expens.io</li>
           {currentUser ? (
             <>
               <div className="logout-btn-container">

@@ -8,6 +8,8 @@ import Login from './Login';
 import SignUp from './SignUp';
 import Navbar from './Navbar';
 
+const API_URL = process.env.API_URL || 'localhost:5000';
+
 export default class ExpenseApp extends Component {
   constructor(props) {
     super(props);
@@ -96,7 +98,7 @@ export default class ExpenseApp extends Component {
 
       const result = await axios({
         method: 'get',
-        url: `http://localhost:5000/expenses`,
+        url: `${API_URL}/expenses`,
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -128,7 +130,7 @@ export default class ExpenseApp extends Component {
       if (year === 'ALL') {
         const result = await axios({
           method: 'get',
-          url: `http://localhost:5000/expenses`,
+          url: `${API_URL}/expenses`,
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -150,7 +152,7 @@ export default class ExpenseApp extends Component {
       } else {
         const result = await axios({
           method: 'get',
-          url: `http://localhost:5000/expenses/${year}`,
+          url: `${API_URL}/expenses/${year}`,
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -185,7 +187,7 @@ export default class ExpenseApp extends Component {
       if (month === 'ALL') {
         const result = await axios({
           method: 'get',
-          url: `http://localhost:5000/expenses/${this.state.year}`,
+          url: `${API_URL}/expenses/${this.state.year}`,
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -209,7 +211,7 @@ export default class ExpenseApp extends Component {
       } else {
         const result = await axios({
           method: 'get',
-          url: `http://localhost:5000/expenses/${this.state.year}/${month}`,
+          url: `${API_URL}/expenses/${this.state.year}/${month}`,
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -244,7 +246,7 @@ export default class ExpenseApp extends Component {
       if (day === 'ALL') {
         const result = await axios({
           method: 'get',
-          url: `http://localhost:5000/expenses/${this.state.year}/${this.state.month}`,
+          url: `${API_URL}/expenses/${this.state.year}/${this.state.month}`,
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -268,7 +270,7 @@ export default class ExpenseApp extends Component {
       } else {
         const result = await axios({
           method: 'get',
-          url: `http://localhost:5000/expenses/${this.state.year}/${this.state.month}/${day}`,
+          url: `${API_URL}/expenses/${this.state.year}/${this.state.month}/${day}`,
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -305,7 +307,7 @@ export default class ExpenseApp extends Component {
   login = async () => {
     const result = await axios({
       method: 'post',
-      url: `http://localhost:5000/users/login`,
+      url: `${API_URL}/users/login`,
       data: {
         username: this.state.username,
         password: this.state.password,
@@ -345,7 +347,7 @@ export default class ExpenseApp extends Component {
 
       const result = await axios({
         method: 'post',
-        url: `http://localhost:5000/expenses`,
+        url: `${API_URL}/expenses`,
         data: {
           expense_name: this.state.expense_name,
           price: this.state.price,
@@ -378,7 +380,7 @@ export default class ExpenseApp extends Component {
   createAccount = async () => {
     const result = await axios({
       method: 'post',
-      url: `http://localhost:5000/users/signup`,
+      url: `${API_URL}/users/signup`,
       data: {
         email: this.state.email,
         username: this.state.username,
@@ -427,7 +429,7 @@ export default class ExpenseApp extends Component {
 
       const result = await axios({
         method: 'delete',
-        url: `http://localhost:5000/expenses/${expenseId}`,
+        url: `${API_URL}/expenses/${expenseId}`,
         headers: { Authorization: `Bearer ${token}` },
       });
       console.log(expenseId);
@@ -457,7 +459,7 @@ export default class ExpenseApp extends Component {
 
       const result = await axios({
         method: 'patch',
-        url: `http://localhost:5000/expenses/${expenseId}`,
+        url: `${API_URL}/expenses/${expenseId}`,
         data: {
           expense_name: expenseName,
         },
@@ -480,7 +482,7 @@ export default class ExpenseApp extends Component {
 
       const result = await axios({
         method: 'patch',
-        url: `http://localhost:5000/expenses/${expenseId}`,
+        url: `${API_URL}/expenses/${expenseId}`,
         data: {
           price: price,
         },
@@ -503,7 +505,7 @@ export default class ExpenseApp extends Component {
 
       const result = await axios({
         method: 'patch',
-        url: `http://localhost:5000/expenses/${expenseId}`,
+        url: `${API_URL}/expenses/${expenseId}`,
         data: {
           category: category,
         },
@@ -526,7 +528,7 @@ export default class ExpenseApp extends Component {
 
       const result = await axios({
         method: 'patch',
-        url: `http://localhost:5000/expenses/${expenseId}`,
+        url: `${API_URL}/expenses/${expenseId}`,
         data: {
           paid_to: paid_to,
         },
@@ -553,7 +555,7 @@ export default class ExpenseApp extends Component {
       //Something is getting blocked here
       const result = await axios({
         method: 'patch',
-        url: `http://localhost:5000/expenses/${expenseId}`,
+        url: `${API_URL}/expenses/${expenseId}`,
         data: {
           expense_date: time.getTime() / 1000,
         },
