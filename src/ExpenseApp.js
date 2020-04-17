@@ -8,7 +8,8 @@ import Login from './Login';
 import SignUp from './SignUp';
 import Navbar from './Navbar';
 
-const API_URL = process.env.API_URL || 'localhost:5000';
+// const API_URL = process.env.API_URL || 'localhost:5000';
+const API_URL = process.env.API_URL;
 
 export default class ExpenseApp extends Component {
   constructor(props) {
@@ -37,7 +38,8 @@ export default class ExpenseApp extends Component {
 
   componentDidMount() {
     console.log('Component Mounted');
-    console.log(this.state.expenses);
+    // console.log(this.state.expenses);
+    console.log(API_URL);
 
     try {
       const token = JSON.parse(localStorage.getItem('token'));
