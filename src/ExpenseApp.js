@@ -8,8 +8,7 @@ import Login from './Login';
 import SignUp from './SignUp';
 import Navbar from './Navbar';
 
-// const API_URL = process.env.API_URL || 'localhost:5000';
-const API_URL = process.env.API_URL;
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 export default class ExpenseApp extends Component {
   constructor(props) {
@@ -38,8 +37,6 @@ export default class ExpenseApp extends Component {
 
   componentDidMount() {
     console.log('Component Mounted');
-    // console.log(this.state.expenses);
-    console.log(API_URL);
 
     try {
       const token = JSON.parse(localStorage.getItem('token'));
@@ -83,18 +80,9 @@ export default class ExpenseApp extends Component {
 
   handleFormChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
-
-    console.log(
-      this.state.startDate,
-      this.state.expense_name,
-      this.state.price,
-      this.state.category,
-      this.state.paid_to
-    );
   };
 
   getExpenses = async () => {
-    console.log('GETTING EXPENSES');
     try {
       const token = JSON.parse(localStorage.getItem('token'));
 
@@ -125,7 +113,7 @@ export default class ExpenseApp extends Component {
 
   //Get all expenses for a particular year
   getYearExpenses = async (year) => {
-    console.log('GETTING YEARLY EXPENSES for:', year);
+    // console.log('GETTING YEARLY EXPENSES for:', year);
     try {
       const token = JSON.parse(localStorage.getItem('token'));
 
@@ -173,8 +161,6 @@ export default class ExpenseApp extends Component {
           expenses: [...result.data],
           startDate: new Date(),
         });
-
-        console.log(result);
       }
     } catch (e) {
       console.log(e);
@@ -182,7 +168,7 @@ export default class ExpenseApp extends Component {
   };
 
   getMonthExpenses = async (month) => {
-    console.log('GETTING YEARLY EXPENSES for:', month);
+    // console.log('GETTING YEARLY EXPENSES for:', month);
     try {
       const token = JSON.parse(localStorage.getItem('token'));
 
@@ -208,8 +194,6 @@ export default class ExpenseApp extends Component {
           expenses: [...result.data],
           startDate: new Date(),
         });
-
-        console.log(result);
       } else {
         const result = await axios({
           method: 'get',
@@ -232,8 +216,6 @@ export default class ExpenseApp extends Component {
           expenses: [...result.data],
           startDate: new Date(),
         });
-
-        console.log(result);
       }
     } catch (e) {
       console.log(e);
@@ -241,7 +223,7 @@ export default class ExpenseApp extends Component {
   };
 
   getDayExpenses = async (day) => {
-    console.log('GETTING daily EXPENSES for:', day);
+    // console.log('GETTING daily EXPENSES for:', day);
     try {
       const token = JSON.parse(localStorage.getItem('token'));
 
@@ -268,7 +250,7 @@ export default class ExpenseApp extends Component {
           startDate: new Date(),
         });
 
-        console.log(result);
+        // console.log(result);
       } else {
         const result = await axios({
           method: 'get',
@@ -291,8 +273,6 @@ export default class ExpenseApp extends Component {
           expenses: [...result.data],
           startDate: new Date(),
         });
-
-        console.log(result);
       }
     } catch (e) {
       console.log(e);
@@ -329,7 +309,6 @@ export default class ExpenseApp extends Component {
     this.getCurrentUser();
     this.getExpenses();
     this.clearLoginForm();
-    console.log(this.state.username, this.state.passoword);
   };
 
   logout = () => {
@@ -359,8 +338,6 @@ export default class ExpenseApp extends Component {
         },
         headers: { Authorization: `Bearer ${token}` },
       });
-
-      console.log(this.state.startDate);
 
       this.getExpenses();
 
@@ -410,15 +387,12 @@ export default class ExpenseApp extends Component {
     this.setState({
       startDate: date,
     });
-    console.log(this.state.startDate);
   };
 
   formatGraphData = () => {
     const data = this.state.expenses.map((val) => {
       return val;
     });
-
-    console.log(data);
 
     this.setState({
       graphData: '',
@@ -434,7 +408,6 @@ export default class ExpenseApp extends Component {
         url: `${API_URL}/expenses/${expenseId}`,
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log(expenseId);
 
       this.getExpenses();
     } catch (e) {
@@ -468,8 +441,6 @@ export default class ExpenseApp extends Component {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      console.log(expenseId, expenseName);
-
       this.getExpenses();
 
       //Clear inputs after adding expense
@@ -490,8 +461,6 @@ export default class ExpenseApp extends Component {
         },
         headers: { Authorization: `Bearer ${token}` },
       });
-
-      console.log(expenseId, price);
 
       this.getExpenses();
 
@@ -514,8 +483,6 @@ export default class ExpenseApp extends Component {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      console.log(expenseId, category);
-
       this.getExpenses();
 
       //Clear inputs after adding expense
@@ -537,8 +504,6 @@ export default class ExpenseApp extends Component {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      console.log(expenseId, paid_to);
-
       this.getExpenses();
 
       //Clear inputs after adding expense
@@ -550,7 +515,6 @@ export default class ExpenseApp extends Component {
   //This code is not executing
   editExpenseDate = async (expenseId, time) => {
     //Time is correct up here
-    console.log(expenseId, time);
     try {
       const token = JSON.parse(localStorage.getItem('token'));
 
@@ -563,8 +527,6 @@ export default class ExpenseApp extends Component {
         },
         headers: { Authorization: `Bearer ${token}` },
       });
-
-      // console.log(time);
 
       this.getExpenses();
 
