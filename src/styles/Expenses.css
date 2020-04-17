@@ -1,6 +1,17 @@
-table {
+.expenses-container {
   margin-top: 5em;
-  width: 50%;
+  margin-bottom: 1em;
+  padding-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: purple; */
+}
+
+table {
+  /* position: relative; */
+  margin-top: 5em;
+  width: 100%;
   font-size: 12px;
   border: 1px solid black;
   border-collapse: collapse;
@@ -20,15 +31,6 @@ td {
   padding: 0.6em;
   font-size: 1.4em;
   border: 1px solid black;
-}
-
-.expenses-container {
-  margin-top: 5em;
-  margin-bottom: 1em;
-  padding-bottom: 2em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .expenses-title {
@@ -62,6 +64,7 @@ td {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  /* background-color: blue; */
 }
 
 .expense-edit-form {
@@ -107,4 +110,24 @@ td {
   margin: 1em;
   display: flex;
   flex-direction: row;
+}
+
+.graph-table-container {
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-between; */
+}
+
+.graph-container {
+  width: 100%;
+}
+
+.pie-graph-container {
+}
+
+.analytics-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }

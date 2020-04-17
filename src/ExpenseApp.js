@@ -189,7 +189,17 @@ export default class ExpenseApp extends Component {
           headers: { Authorization: `Bearer ${token}` },
         });
 
+        const prices = result.data.map((val) => {
+          const obj = {};
+          const date = new Date(val.expense_date * 1000);
+
+          obj['price'] = Number(val.price);
+          obj['date'] = `${date}`.slice(0, 15);
+          return obj;
+        });
+
         this.setState({
+          graphData: [...prices],
           month: month,
           expenses: [...result.data],
           startDate: new Date(),
@@ -203,7 +213,17 @@ export default class ExpenseApp extends Component {
           headers: { Authorization: `Bearer ${token}` },
         });
 
+        const prices = result.data.map((val) => {
+          const obj = {};
+          const date = new Date(val.expense_date * 1000);
+
+          obj['price'] = Number(val.price);
+          obj['date'] = `${date}`.slice(0, 15);
+          return obj;
+        });
+
         this.setState({
+          graphData: [...prices],
           month: month,
           expenses: [...result.data],
           startDate: new Date(),
@@ -228,7 +248,17 @@ export default class ExpenseApp extends Component {
           headers: { Authorization: `Bearer ${token}` },
         });
 
+        const prices = result.data.map((val) => {
+          const obj = {};
+          const date = new Date(val.expense_date * 1000);
+
+          obj['price'] = Number(val.price);
+          obj['date'] = `${date}`.slice(0, 15);
+          return obj;
+        });
+
         this.setState({
+          graphData: [...prices],
           day: day,
           expenses: [...result.data],
           startDate: new Date(),
@@ -242,7 +272,17 @@ export default class ExpenseApp extends Component {
           headers: { Authorization: `Bearer ${token}` },
         });
 
+        const prices = result.data.map((val) => {
+          const obj = {};
+          const date = new Date(val.expense_date * 1000);
+
+          obj['price'] = Number(val.price);
+          obj['date'] = `${date}`.slice(0, 15);
+          return obj;
+        });
+
         this.setState({
+          graphData: [...prices],
           day: day,
           expenses: [...result.data],
           startDate: new Date(),

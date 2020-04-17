@@ -7,6 +7,8 @@ import MonthSelector from './MonthSelector';
 import DaySelector from './DaySelector';
 import Graph1 from './Graph1';
 
+import { PieChart, Pie, Cell } from 'recharts';
+
 import './styles/Expenses.css';
 
 export default class Expenses extends Component {
@@ -46,9 +48,81 @@ export default class Expenses extends Component {
 
     //Might be easier to do this on the backend in postgres
 
-    const totalPrice = expenses.reduce((acc, curr) => {
-      return acc + Number(curr.price);
-    }, 0);
+    const totalPrice = expenses
+      .reduce((acc, curr) => {
+        return acc + Number(curr.price);
+      }, 0)
+      .toFixed(2);
+
+    const categoryObj = {};
+
+    const createCatBreak = () => {
+      for (let i = 0; i < expenses.length; i++) {
+        if (categoryObj[expenses[i]['category']]) {
+          categoryObj[expenses[i]['category']] += Number(expenses[i]['price']);
+        } else {
+          categoryObj[expenses[i]['category']] = Number(expenses[i]['price']);
+        }
+      }
+    };
+
+    createCatBreak();
+
+    const catNames = Object.keys(categoryObj);
+    const catPrices = Object.values(categoryObj);
+
+    const catArr = catNames.map((val, idx) => {
+      let obj = {};
+      obj['expense'] = catNames[idx];
+      obj['price'] = catPrices[idx];
+
+      return obj;
+    });
+
+    const COLORS = [
+      '#f714ce',
+      '#f71942',
+      'grey',
+      '#10e348',
+      'teal',
+      'blue',
+      'brown',
+      '#14bef7',
+      'orange',
+      'purple',
+      'black',
+      '#19f78c',
+      'pink',
+    ];
+
+    // const RADIAN = Math.PI / 180;
+    // const renderCustomizedLabel = ({
+    //   cx,
+    //   cy,
+    //   midAngle,
+    //   innerRadius,
+    //   outerRadius,
+    //   percent,
+    //   index,
+    // }) => {
+    //   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    //   const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    //   const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    //   return (
+    //     <text
+    //       x={x}
+    //       y={y}
+    //       fill="white"
+    //       textAnchor="middle"
+    //       dominantBaseline="central"
+    //     >
+    //       {`${(percent * 100).toFixed(0)}%`}
+    //     </text>
+    //   );
+    // };
+
+    // console.log(catArr);
 
     return (
       <div className="expenses-container">
@@ -84,6 +158,44 @@ export default class Expenses extends Component {
           </button>
         )}
 
+        <div className="analytics-container">
+          <ul>
+            {catNames.map((x, idx) => {
+              return (
+                <li
+                  style={{
+                    color: COLORS[idx],
+                    fontSize: '20px',
+                    margin: '1em',
+                  }}
+                  key={idx}
+                >{`${x}: $${catPrices[idx].toFixed(2)} (${(
+                  (catPrices[idx] / totalPrice) *
+                  100
+                ).toFixed(2)}%)`}</li>
+              );
+            })}
+          </ul>
+          <div className="pie-graph-container">
+            <PieChart width={550} height={500}>
+              <Pie
+                data={catArr}
+                dataKey="price"
+                nameKey="price"
+                cx="50%"
+                cy="50%"
+                outerRadius={200}
+                fill="blue"
+                label
+              >
+                {catArr.map((entry, idx) => (
+                  <Cell fill={COLORS[idx % COLORS.length]} key={idx} />
+                ))}
+              </Pie>
+            </PieChart>
+          </div>
+        </div>
+
         <div className="selector-container">
           <YearSelector year={year} getYearExpenses={getYearExpenses} />
           {year !== 'ALL' ? (
@@ -93,54 +205,58 @@ export default class Expenses extends Component {
             <DaySelector day={day} getDayExpenses={getDayExpenses} />
           ) : null}
         </div>
-        <Graph1 graphData={graphData} />
 
-        <div className="edit-container">
-          <table>
-            <thead>
-              <tr>
-                <th>
-                  <div className="table-header">Date</div>
-                </th>
-                <th>
-                  <div className="table-header">Expense</div>
-                </th>
-                <th>
-                  <div className="table-header">Price</div>
-                </th>
-                <th>
-                  <div className="table-header">Category</div>
-                </th>
-                <th>
-                  <div className="table-header">Paid To</div>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {expenses.map((val) => {
-                return (
-                  <ExpenseRow
-                    key={val.id}
-                    time={val.expense_date}
-                    id={val.id}
-                    expense_name={val.expense_name}
-                    price={val.price}
-                    category={val.category}
-                    paid_to={val.paid_to}
-                    startDate={startDate}
-                    setCalendar={setCalendar}
-                    deleteExpense={deleteExpense}
-                    handleFormChange={handleFormChange}
-                    editExpenseName={editExpenseName}
-                    editExpensePrice={editExpensePrice}
-                    editExpenseCategory={editExpenseCategory}
-                    editExpensePaidTo={editExpensePaidTo}
-                    editExpenseDate={editExpenseDate}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
+        <div className="graph-table-container">
+          <div className="graph-container">
+            <Graph1 graphData={graphData} />
+          </div>
+          <div className="edit-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    <div className="table-header">Date</div>
+                  </th>
+                  <th>
+                    <div className="table-header">Expense</div>
+                  </th>
+                  <th>
+                    <div className="table-header">Price</div>
+                  </th>
+                  <th>
+                    <div className="table-header">Category</div>
+                  </th>
+                  <th>
+                    <div className="table-header">Paid To</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {expenses.map((val) => {
+                  return (
+                    <ExpenseRow
+                      key={val.id}
+                      time={val.expense_date}
+                      id={val.id}
+                      expense_name={val.expense_name}
+                      price={val.price}
+                      category={val.category}
+                      paid_to={val.paid_to}
+                      startDate={startDate}
+                      setCalendar={setCalendar}
+                      deleteExpense={deleteExpense}
+                      handleFormChange={handleFormChange}
+                      editExpenseName={editExpenseName}
+                      editExpensePrice={editExpensePrice}
+                      editExpenseCategory={editExpenseCategory}
+                      editExpensePaidTo={editExpensePaidTo}
+                      editExpenseDate={editExpenseDate}
+                    />
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     );

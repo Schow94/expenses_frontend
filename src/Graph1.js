@@ -17,9 +17,13 @@ import {
 export default class Graph1 extends Component {
   render() {
     const { graphData } = this.props;
-    console.log(graphData);
+    // console.log(graphData);
     return (
-      <ResponsiveContainer className="graph-container" width="80%" height={400}>
+      <ResponsiveContainer
+        className="graph-container"
+        width="100%"
+        height={400}
+      >
         <LineChart
           data={graphData}
           margin={{ top: 20, right: 10, left: 20, bottom: 80 }}
