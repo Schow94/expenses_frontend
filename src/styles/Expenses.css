@@ -142,6 +142,96 @@ td {
   margin-top: 1em;
 }
 
+.menu {
+  width: 300px;
+  height: 400px;
+  background-color: #fafafa;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 0.1%;
+  margin-right: 0.1%;
+  /* border: 1px solid grey; */
+  border-radius: 10px;
+  z-index: 5;
+}
+
+.menu-list {
+  width: 80%;
+  padding: 0;
+}
+.menu-list:hover {
+  cursor: pointer;
+}
+
+.menu-list-item {
+  list-style-type: none;
+  margin-left: 10%;
+  margin-top: 1.3em;
+  padding: 1em;
+}
+
+.menu-list-item:hover {
+  background-color: grey;
+}
+
+.income-container {
+  background-color: #f0f3f5;
+  border-radius: 5px;
+  width: 80%;
+  height: 400px;
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-income-form {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.add-income-input {
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  padding: 0.7em;
+  margin-bottom: 1em;
+  width: 30%;
+}
+
+.update-income-btn {
+  margin-top: 1em;
+  width: 150px;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  background-color: #00ed18;
+  font-size: 1em;
+}
+
+.update-income-btn:hover {
+  background-color: #02cc16;
+}
+
+.cancel-btn {
+  margin-top: 1em;
+  width: 150px;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  background-color: orange;
+  font-size: 1em;
+}
+
+button:hover {
+  color: white;
+  cursor: pointer;
+}
+
 /* ------------------------------ MEDIA QUERIES ------------------------------- */
 @media only screen and (max-width: 300px) {
   .expenses-container {
@@ -239,6 +329,55 @@ td {
     margin-top: 1em;
     width: 100%;
     list-style-type: none;
+  }
+  .menu {
+    width: 40%;
+    height: 280px;
+    margin-top: 0.5%;
+    margin-right: 0.5%;
+    z-index: 5;
+  }
+
+  .menu-list {
+    width: 80%;
+    padding: 0;
+  }
+
+  .income-container {
+    border-radius: 5px;
+    width: 80%;
+    height: 200px;
+    margin-top: 1em;
+  }
+
+  .add-income-form {
+    margin-top: 2em;
+    width: 100%;
+  }
+
+  .add-income-input {
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    padding: 0.7em;
+    margin-bottom: 2em;
+    width: 70%;
+  }
+
+  .update-income-btn {
+    margin-top: 1em;
+    width: 100px;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+
+  .cancel-btn {
+    margin-top: 1em;
+    width: 100px;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 1em;
   }
 }
 
@@ -340,6 +479,56 @@ td {
     margin-top: 1em;
     width: 100%;
     list-style-type: none;
+  }
+
+  .menu {
+    width: 40%;
+    height: 320px;
+    margin-top: 0.5%;
+    margin-right: 0.5%;
+    z-index: 5;
+  }
+
+  .menu-list {
+    width: 80%;
+    padding: 0;
+  }
+  .income-container {
+    border-radius: 5px;
+    width: 80%;
+    height: 200px;
+    margin-top: 2em;
+    padding-bottom: 2em;
+  }
+
+  .add-income-form {
+    margin-top: 2em;
+    width: 100%;
+  }
+
+  .add-income-input {
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    padding: 0.7em;
+    margin-bottom: 2em;
+    width: 70%;
+  }
+
+  .update-income-btn {
+    margin-top: 1em;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+
+  .cancel-btn {
+    margin-top: 1em;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 1em;
   }
 }
 

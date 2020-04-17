@@ -57,6 +57,31 @@ li {
   cursor: pointer;
 }
 
+.user-icon {
+  background-color: black;
+  color: white;
+  font-size: 3em;
+}
+.user-btn {
+  border: none;
+  background-color: black;
+  margin-right: 2em;
+  margin-left: 1em;
+}
+
+.user-btn:hover {
+  border: none;
+  cursor: pointer;
+}
+
+.user-icon:hover {
+  color: #0fc9fc;
+}
+
+button:focus {
+  outline: 0;
+}
+
 /* ------------------------------ MEDIA QUERIES ------------------------------- */
 @media only screen and (max-width: 300px) {
   .navbar {
@@ -76,6 +101,14 @@ li {
   .nav-title {
     font-size: 1.5em;
   }
+
+  .user-icon {
+    font-size: 1.5em;
+  }
+  .user-btn {
+    margin-right: 0.2em;
+    margin-left: 0.2em;
+  }
 }
 
 @media only screen and (min-width: 300px) and (max-width: 450px) {
@@ -94,11 +127,26 @@ li {
   }
 
   .nav-title {
-    font-size: 1.5em;
+    font-size: 1em;
   }
 
   .logout-btn-container {
     font-size: 0.9em;
+  }
+
+  .user-icon {
+    font-size: 2em;
+  }
+
+  .user-btn {
+    margin: 0;
+    margin-right: 1em;
+    margin-left: 0.5em;
+
+    padding: 0;
+  }
+  .current-user {
+    font-size: 0.7em;
   }
 }
 

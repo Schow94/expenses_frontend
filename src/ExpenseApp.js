@@ -32,6 +32,8 @@ export default class ExpenseApp extends Component {
       month: 'ALL',
       day: 'ALL',
       graphData: [],
+      showAccountInfo: false,
+      showIncomeForm: false,
     };
   }
 
@@ -536,10 +538,27 @@ export default class ExpenseApp extends Component {
     }
   };
 
+  toggleAccountInfo = () => {
+    this.setState({
+      showAccountInfo: !this.state.showAccountInfo,
+    });
+    console.log(this.state.showAccountInfo);
+  };
+
+  toggleShowIncomeForm = () => {
+    this.setState({
+      showIncomeForm: !this.state.showIncomeForm,
+    });
+  };
+
   render() {
     return (
       <>
-        <Navbar currentUser={this.state.currentUser} logout={this.logout} />
+        <Navbar
+          currentUser={this.state.currentUser}
+          logout={this.logout}
+          toggleAccountInfo={this.toggleAccountInfo}
+        />
         {this.state.currentUser ? (
           <Expenses
             expenses={this.state.expenses}
@@ -568,6 +587,9 @@ export default class ExpenseApp extends Component {
             day={this.state.day}
             getDayExpenses={this.getDayExpenses}
             graphData={this.state.graphData}
+            showAccountInfo={this.state.showAccountInfo}
+            showIncomeForm={this.state.showIncomeForm}
+            toggleShowIncomeForm={this.toggleShowIncomeForm}
           />
         ) : (
           <>

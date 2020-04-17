@@ -16,6 +16,10 @@ export default class Expenses extends Component {
 
   componentDidUpdate() {}
 
+  handleShowIncomeForm = () => {
+    this.props.toggleShowIncomeForm();
+  };
+
   render() {
     const {
       expenses,
@@ -44,6 +48,9 @@ export default class Expenses extends Component {
       day,
       getDayExpenses,
       graphData,
+      showAccountInfo,
+      showIncomeForm,
+      toggleShowIncomeForm,
     } = this.props;
 
     //Move this logic to main ExpenseApp.js & save to state
@@ -125,7 +132,47 @@ export default class Expenses extends Component {
 
     return (
       <div className="expenses-container">
+        {showIncomeForm ? (
+          <div className="income-container">
+            <form className="add-income-form">
+              <input
+                className="add-income-input"
+                placeholder="Add Income (Monthly)"
+              ></input>
+              <button className="update-income-btn">Update Income</button>
+            </form>
+            <button onClick={this.handleShowIncomeForm} className="cancel-btn">
+              CANCEL
+            </button>
+          </div>
+        ) : null}
+
         <h1 className="expenses-title">Total Expenses: ${totalPrice}</h1>
+        {showAccountInfo ? (
+          <div className="menu">
+            <ul className="menu-list">
+              <li
+                onClick={this.handleShowIncomeForm}
+                className="menu-list-item"
+              >
+                Account Info
+              </li>
+              <hr></hr>
+              <li
+                onClick={this.handleShowIncomeForm}
+                className="menu-list-item"
+              >
+                Income
+              </li>
+              <hr></hr>
+              <li className="menu-list-item">Savings</li>
+              <hr></hr>
+              <li className="menu-list-item">Retirement</li>
+              <hr></hr>
+              <li className="menu-list-item ">Debt</li>
+            </ul>
+          </div>
+        ) : null}
         {toggleAddExpense ? (
           <>
             <button

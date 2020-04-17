@@ -6,8 +6,12 @@ export default class Navbar extends Component {
     this.props.logout();
   };
 
+  handleClick = () => {
+    this.props.toggleAccountInfo();
+  };
+
   render() {
-    const { currentUser } = this.props;
+    const { currentUser, toggleAccountInfo } = this.props;
     return (
       <nav className="navbar">
         <ul className="nav-list">
@@ -15,9 +19,14 @@ export default class Navbar extends Component {
           {currentUser ? (
             <>
               <div className="logout-btn-container">
-                <p>Currently signed in as: {currentUser}</p>
+                <p className="current-user">
+                  Currently signed in as: {currentUser}
+                </p>
                 <button className="logout-btn" onClick={this.handleLogout}>
                   Logout
+                </button>
+                <button onClick={this.handleClick} className="user-btn">
+                  <i className="user-icon fa fa-user-circle"></i>
                 </button>
               </div>
             </>
