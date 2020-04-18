@@ -13,9 +13,16 @@ export default class Login extends Component {
   };
 
   render() {
+    const { loginError } = this.props;
     return (
       <div className="login-container">
         <h3 className="login-title">Login</h3>
+        {loginError ? (
+          <div className="login-error-container">
+            <h3 className="login-error-text">{loginError}</h3>
+          </div>
+        ) : null}
+
         <form className="login-form" onSubmit={this.handleSubmit}>
           <input
             autoComplete="off"

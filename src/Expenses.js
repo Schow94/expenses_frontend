@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 
-import ExpenseRow from './ExpenseRow';
 import AddExpenseForm from './AddExpenseForm';
 import YearSelector from './YearSelector';
 import MonthSelector from './MonthSelector';
 import DaySelector from './DaySelector';
 import Graph1 from './Graph1';
+import DropdownMenu from './DropdownMenu';
+import AddIncomeForm from './AddIncomeForm';
+import CategoryBreakdownItem from './CategoryBreakdownItem';
+import PieGraph from './PieGraph';
+import Table from './Table';
 
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { ResponsiveContainer } from 'recharts';
 
 import './styles/Expenses.css';
 
@@ -15,10 +19,6 @@ export default class Expenses extends Component {
   componentDidMount() {}
 
   componentDidUpdate() {}
-
-  handleShowIncomeForm = () => {
-    this.props.toggleShowIncomeForm();
-  };
 
   render() {
     const {
@@ -33,9 +33,7 @@ export default class Expenses extends Component {
       paid_to,
       deleteExpense,
       toggleAddExpense,
-      toggleEditOn,
       toggleAddForm,
-      toggleEditForm,
       editExpenseName,
       editExpensePrice,
       editExpenseCategory,
@@ -53,7 +51,7 @@ export default class Expenses extends Component {
       toggleShowIncomeForm,
     } = this.props;
 
-    //Move this logic to main ExpenseApp.js & save to state
+    //Move this logic to ExpenseApp.js state
     const totalPrice = expenses
       .reduce((acc, curr) => {
         return acc + Number(curr.price);
@@ -133,46 +131,15 @@ export default class Expenses extends Component {
     return (
       <div className="expenses-container">
         {showIncomeForm ? (
-          <div className="income-container">
-            <form className="add-income-form">
-              <input
-                className="add-income-input"
-                placeholder="Add Income (Monthly)"
-              ></input>
-              <button className="update-income-btn">Update Income</button>
-            </form>
-            <button onClick={this.handleShowIncomeForm} className="cancel-btn">
-              CANCEL
-            </button>
-          </div>
+          <AddIncomeForm toggleShowIncomeForm={toggleShowIncomeForm} />
         ) : null}
 
         <h1 className="expenses-title">Total Expenses: ${totalPrice}</h1>
+
         {showAccountInfo ? (
-          <div className="menu">
-            <ul className="menu-list">
-              <li
-                onClick={this.handleShowIncomeForm}
-                className="menu-list-item"
-              >
-                Account Info
-              </li>
-              <hr></hr>
-              <li
-                onClick={this.handleShowIncomeForm}
-                className="menu-list-item"
-              >
-                Income
-              </li>
-              <hr></hr>
-              <li className="menu-list-item">Savings</li>
-              <hr></hr>
-              <li className="menu-list-item">Retirement</li>
-              <hr></hr>
-              <li className="menu-list-item ">Debt</li>
-            </ul>
-          </div>
+          <DropdownMenu toggleShowIncomeForm={toggleShowIncomeForm} />
         ) : null}
+
         {toggleAddExpense ? (
           <>
             <button
@@ -208,46 +175,29 @@ export default class Expenses extends Component {
           <ul className="category-breakdown">
             {catNames.map((x, idx) => {
               return (
-                <li
-                  className="category-list-item"
-                  style={{
-                    color: COLORS[idx],
-                  }}
+                <CategoryBreakdownItem
+                  catPrices={catPrices}
+                  COLORS={COLORS}
+                  idx={idx}
                   key={idx}
-                >{`${x}: $${catPrices[idx].toFixed(2)} (${(
-                  (catPrices[idx] / totalPrice) *
-                  100
-                ).toFixed(2)}%)`}</li>
+                  totalPrice={totalPrice}
+                  name={x}
+                />
               );
             })}
           </ul>
 
           {/* Move pie chart to its own component */}
-          <div className="pie-graph-container">
-            <ResponsiveContainer width="100%" aspect={1.5}>
-              <PieChart>
-                <Pie
-                  data={catArr}
-                  dataKey="price"
-                  nameKey="price"
-                  // outerRadius="100%"
-                  fill="blue"
-                  label
-                >
-                  {catArr.map((entry, idx) => (
-                    <Cell fill={COLORS[idx % COLORS.length]} key={idx} />
-                  ))}
-                </Pie>
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
+          <PieGraph COLORS={COLORS} catArr={catArr} />
         </div>
 
         <div className="selector-container">
           <YearSelector year={year} getYearExpenses={getYearExpenses} />
+
           {year !== 'ALL' ? (
             <MonthSelector month={month} getMonthExpenses={getMonthExpenses} />
           ) : null}
+
           {year !== 'ALL' && month !== 'ALL' ? (
             <DaySelector day={day} getDayExpenses={getDayExpenses} />
           ) : null}
@@ -259,52 +209,20 @@ export default class Expenses extends Component {
               <Graph1 graphData={graphData} />
             </ResponsiveContainer>
           </div>
+
           <div className="edit-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>
-                    <div className="table-header">Date</div>
-                  </th>
-                  <th>
-                    <div className="table-header">Expense</div>
-                  </th>
-                  <th>
-                    <div className="table-header">Price</div>
-                  </th>
-                  <th>
-                    <div className="table-header">Category</div>
-                  </th>
-                  <th>
-                    <div className="table-header">Paid To</div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {expenses.map((val) => {
-                  return (
-                    <ExpenseRow
-                      key={val.id}
-                      time={val.expense_date}
-                      id={val.id}
-                      expense_name={val.expense_name}
-                      price={val.price}
-                      category={val.category}
-                      paid_to={val.paid_to}
-                      startDate={startDate}
-                      setCalendar={setCalendar}
-                      deleteExpense={deleteExpense}
-                      handleFormChange={handleFormChange}
-                      editExpenseName={editExpenseName}
-                      editExpensePrice={editExpensePrice}
-                      editExpenseCategory={editExpenseCategory}
-                      editExpensePaidTo={editExpensePaidTo}
-                      editExpenseDate={editExpenseDate}
-                    />
-                  );
-                })}
-              </tbody>
-            </table>
+            <Table
+              expenses={expenses}
+              startDate={startDate}
+              setCalendar={setCalendar}
+              deleteExpense={deleteExpense}
+              handleFormChange={handleFormChange}
+              editExpenseName={editExpenseName}
+              editExpensePrice={editExpensePrice}
+              editExpenseCategory={editExpenseCategory}
+              editExpensePaidTo={editExpensePaidTo}
+              editExpenseDate={editExpenseDate}
+            />
           </div>
         </div>
       </div>

@@ -1,0 +1,58 @@
+.pie-graph-container {
+  width: 50%;
+}
+
+/* ------------------------------ MEDIA QUERIES ------------------------------- */
+@media only screen and (max-width: 300px) {
+  .pie-graph-container {
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 450px) {
+  .pie-graph-container {
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-width: 450px) and (max-width: 650px) {
+  .pie-graph-container {
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-width: 650px) and (max-width: 800px) {
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1000px) {
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1300px) {
+  .pie-graph-container {
+    justify-content: center;
+    width: 70%;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-width: 1300px) and (max-width: 1500px) {
+  .pie-graph-container {
+    justify-content: center;
+    width: 80%;
+    margin: 0;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  .pie-graph-container {
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+  }
+}

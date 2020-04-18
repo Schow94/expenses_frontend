@@ -7,6 +7,7 @@ import Expenses from './Expenses';
 import Login from './Login';
 import SignUp from './SignUp';
 import Navbar from './Navbar';
+import Landing from './Landing';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
@@ -34,12 +35,14 @@ export default class ExpenseApp extends Component {
       graphData: [],
       showAccountInfo: false,
       showIncomeForm: false,
+      loginError: '',
+      showSignupForm: false,
+      showLoginForm: false,
     };
   }
 
   componentDidMount() {
     console.log('Component Mounted');
-
     try {
       const token = JSON.parse(localStorage.getItem('token'));
       if (token) {
@@ -55,6 +58,8 @@ export default class ExpenseApp extends Component {
     console.log('Component Updated');
     //Convert Date obj to unix for db
   }
+
+  componentWillUnmount() {}
 
   getCurrentUser = () => {
     try {
@@ -289,28 +294,43 @@ export default class ExpenseApp extends Component {
   };
 
   login = async () => {
-    const result = await axios({
-      method: 'post',
-      url: `${API_URL}/users/login`,
-      data: {
-        username: this.state.username,
-        password: this.state.password,
-      },
-    });
+    console.log('logggin in');
+    try {
+      const result = await axios({
+        method: 'post',
+        url: `${API_URL}/users/login`,
+        data: {
+          username: this.state.username,
+          password: this.state.password,
+        },
+      });
 
-    const token = result.data.token;
-    localStorage.setItem('token', JSON.stringify(token));
+      const token = result.data.token;
+      localStorage.setItem('token', JSON.stringify(token));
 
-    // Use username/password state only for handling input
-    this.setState({
-      username: '',
-      password: '',
-    });
+      //Get expenses/currentUser after loggin in
+      this.getCurrentUser();
+      this.getExpenses();
+      this.clearLoginForm();
 
-    //Get expenses/currentUser after loggin in
-    this.getCurrentUser();
-    this.getExpenses();
-    this.clearLoginForm();
+      const loginErr = result['data']['message'];
+      if (loginErr) {
+        this.setState({
+          loginError: loginErr,
+          username: '',
+          password: '',
+        });
+      } else {
+        // Use username/password state only for handling input
+        this.setState({
+          loginError: '',
+          username: '',
+          password: '',
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   logout = () => {
@@ -551,6 +571,18 @@ export default class ExpenseApp extends Component {
     });
   };
 
+  toggleSignupForm = () => {
+    this.setState({
+      showSignupForm: !this.state.showSignupForm,
+    });
+  };
+
+  toggleLoginForm = () => {
+    this.setState({
+      showLoginForm: !this.state.showLoginForm,
+    });
+  };
+
   render() {
     return (
       <>
@@ -593,11 +625,23 @@ export default class ExpenseApp extends Component {
           />
         ) : (
           <>
-            <Login login={this.login} handleLogin={this.handleFormChange} />
-            <SignUp
-              handleSignup={this.handleFormChange}
-              createAccount={this.createAccount}
-            />
+            {this.state.showLoginForm ? (
+              <Login
+                loginError={this.state.loginError}
+                login={this.login}
+                handleLogin={this.handleFormChange}
+              />
+            ) : this.state.showSignupForm ? (
+              <SignUp
+                handleSignup={this.handleFormChange}
+                createAccount={this.createAccount}
+              />
+            ) : (
+              <Landing
+                toggleLoginForm={this.toggleLoginForm}
+                toggleSignupForm={this.toggleSignupForm}
+              />
+            )}
           </>
         )}
       </>
