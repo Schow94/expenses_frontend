@@ -35,7 +35,7 @@ export default class Login extends Component {
           <input
             autoComplete="off"
             onChange={(e) => this.handleChange(e)}
-            type="text"
+            type="password"
             placeholder="Password"
             name="password"
             value={this.props.password}
