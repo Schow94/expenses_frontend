@@ -9,8 +9,8 @@ import SignUp from './SignUp';
 import Navbar from './Navbar';
 import Landing from './Landing';
 
-// const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-const API_URL = 'http://localhost:5000';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+// const API_URL = 'http://localhost:5000';
 
 export default class ExpenseApp extends Component {
   constructor(props) {
