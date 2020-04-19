@@ -49,6 +49,10 @@ export default class Expenses extends Component {
       showAccountInfo,
       showIncomeForm,
       toggleShowIncomeForm,
+      toggleDropdownMenu,
+      showDropdownMenu,
+      income_total,
+      updateIncome,
     } = this.props;
 
     //Move this logic to ExpenseApp.js state
@@ -82,6 +86,11 @@ export default class Expenses extends Component {
 
       return obj;
     });
+
+    const income_taxed = income_total * 0.7;
+    const month_income_taxed = income_taxed / 12;
+
+    const amount_left_month = month_income_taxed - totalPrice;
 
     const COLORS = [
       '#f714ce',
@@ -131,12 +140,33 @@ export default class Expenses extends Component {
     return (
       <div className="expenses-container">
         {showIncomeForm ? (
-          <AddIncomeForm toggleShowIncomeForm={toggleShowIncomeForm} />
+          <AddIncomeForm
+            toggleShowIncomeForm={toggleShowIncomeForm}
+            handleFormChange={handleFormChange}
+            income_total={income_total}
+            updateIncome={updateIncome}
+          />
         ) : null}
 
-        <h1 className="expenses-title">Total Expenses: ${totalPrice}</h1>
+        <p className="expenses-title">Total Expenses: ${totalPrice}</p>
+        {year !== 'ALL' ? (
+          <>
+            <p className="income">{`Income in ${year}: $${income_total}`}</p>
+            <p className="income">{`Income (After Taxes): $${income_taxed}`}</p>
+          </>
+        ) : null}
 
-        {showAccountInfo ? (
+        {month !== 'ALL' ? (
+          <>
+            <p className="income">
+              {`Income in ${month}-${year} (After taxes): $${month_income_taxed}`}
+            </p>
+            <p>{`Expenses in ${month}-${year}: $${totalPrice}`}</p>
+            <p>{`Amount left to spend this month: $${amount_left_month}`}</p>
+          </>
+        ) : null}
+
+        {showDropdownMenu ? (
           <DropdownMenu toggleShowIncomeForm={toggleShowIncomeForm} />
         ) : null}
 
@@ -182,6 +212,8 @@ export default class Expenses extends Component {
                   key={idx}
                   totalPrice={totalPrice}
                   name={x}
+                  month_income_taxed={month_income_taxed}
+                  month={month}
                 />
               );
             })}

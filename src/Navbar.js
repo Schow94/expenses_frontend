@@ -7,15 +7,21 @@ export default class Navbar extends Component {
   };
 
   handleClick = () => {
-    this.props.toggleAccountInfo();
+    this.props.toggleDropdownMenu();
+  };
+
+  refreshPage = () => {
+    window.location.reload(false);
   };
 
   render() {
-    const { currentUser, toggleAccountInfo } = this.props;
+    const { currentUser, toggleDropdownMenu } = this.props;
     return (
       <nav className="navbar">
         <ul className="nav-list">
-          <li className="nav-title">Expens.io</li>
+          <li className="nav-title" onClick={this.refreshPage}>
+            Expens.io
+          </li>
           {currentUser ? (
             <>
               <div className="logout-btn-container">

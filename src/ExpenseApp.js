@@ -9,7 +9,8 @@ import SignUp from './SignUp';
 import Navbar from './Navbar';
 import Landing from './Landing';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+// const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API_URL = 'http://localhost:5000';
 
 export default class ExpenseApp extends Component {
   constructor(props) {
@@ -35,9 +36,11 @@ export default class ExpenseApp extends Component {
       graphData: [],
       showAccountInfo: false,
       showIncomeForm: false,
+      showDropdownMenu: false,
       loginError: '',
       showSignupForm: false,
       showLoginForm: false,
+      income_total: 0,
     };
   }
 
@@ -48,6 +51,7 @@ export default class ExpenseApp extends Component {
       if (token) {
         this.getCurrentUser();
         this.getExpenses();
+        this.getIncome();
       }
     } catch (e) {
       console.log(e);
@@ -558,6 +562,12 @@ export default class ExpenseApp extends Component {
     }
   };
 
+  toggleDropdownMenu = () => {
+    this.setState({
+      showDropdownMenu: !this.state.showDropdownMenu,
+    });
+  };
+
   toggleAccountInfo = () => {
     this.setState({
       showAccountInfo: !this.state.showAccountInfo,
@@ -568,6 +578,7 @@ export default class ExpenseApp extends Component {
   toggleShowIncomeForm = () => {
     this.setState({
       showIncomeForm: !this.state.showIncomeForm,
+      showDropdownMenu: false,
     });
   };
 
@@ -583,13 +594,54 @@ export default class ExpenseApp extends Component {
     });
   };
 
+  updateIncome = async (income) => {
+    try {
+      const token = JSON.parse(localStorage.getItem('token'));
+
+      const result = await axios({
+        method: 'post',
+        url: `${API_URL}/users/income`,
+        data: {
+          income_total: this.state.income_total,
+        },
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log(income);
+
+      this.setState({
+        showIncomeForm: false,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  getIncome = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem('token'));
+
+      const result = await axios({
+        method: 'get',
+        url: `${API_URL}/users/income`,
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      this.setState({
+        income_total: result.data.income_total,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   render() {
     return (
       <>
         <Navbar
           currentUser={this.state.currentUser}
           logout={this.logout}
-          toggleAccountInfo={this.toggleAccountInfo}
+          toggleDropdownMenu={this.toggleDropdownMenu}
         />
         {this.state.currentUser ? (
           <Expenses
@@ -622,6 +674,10 @@ export default class ExpenseApp extends Component {
             showAccountInfo={this.state.showAccountInfo}
             showIncomeForm={this.state.showIncomeForm}
             toggleShowIncomeForm={this.toggleShowIncomeForm}
+            showDropdownMenu={this.state.showDropdownMenu}
+            toggleDropdownMenu={this.toggleDropdownMenu}
+            income_total={this.state.income_total}
+            updateIncome={this.updateIncome}
           />
         ) : (
           <>
