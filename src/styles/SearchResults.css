@@ -1,0 +1,8 @@
+.search-results-container {
+  width: 70%;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+}

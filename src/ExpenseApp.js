@@ -20,6 +20,7 @@ export default class ExpenseApp extends Component {
       email: '',
       username: '',
       password: '',
+      allExpenses: [],
       expenses: [],
       currentUser: '',
       startDate: new Date(),
@@ -41,6 +42,8 @@ export default class ExpenseApp extends Component {
       showSignupForm: false,
       showLoginForm: false,
       income_total: 0,
+      searchTerm: '',
+      searchResults: [],
     };
   }
 
@@ -50,7 +53,7 @@ export default class ExpenseApp extends Component {
       const token = JSON.parse(localStorage.getItem('token'));
       if (token) {
         this.getCurrentUser();
-        this.getExpenses();
+        this.getAllExpenses();
         this.getIncome();
       }
     } catch (e) {
@@ -60,7 +63,6 @@ export default class ExpenseApp extends Component {
 
   componentDidUpdate() {
     console.log('Component Updated');
-    //Convert Date obj to unix for db
   }
 
   componentWillUnmount() {}
@@ -93,7 +95,7 @@ export default class ExpenseApp extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  getExpenses = async () => {
+  getAllExpenses = async () => {
     try {
       const token = JSON.parse(localStorage.getItem('token'));
 
@@ -115,6 +117,7 @@ export default class ExpenseApp extends Component {
       this.setState({
         graphData: [...prices],
         expenses: [...result.data],
+        allExpenses: [...result.data],
         startDate: new Date(),
       });
     } catch (e) {
@@ -314,7 +317,7 @@ export default class ExpenseApp extends Component {
 
       //Get expenses/currentUser after loggin in
       this.getCurrentUser();
-      this.getExpenses();
+      this.getAllExpenses();
       this.clearLoginForm();
 
       const loginErr = result['data']['message'];
@@ -345,7 +348,7 @@ export default class ExpenseApp extends Component {
     localStorage.removeItem('token');
 
     //Will clear the expenses since invalid credentials
-    this.getExpenses();
+    this.getAllExpenses();
   };
 
   addExpense = async () => {
@@ -635,6 +638,24 @@ export default class ExpenseApp extends Component {
     }
   };
 
+  filterSearchData = () => {
+    let filteredData = this.state.allExpenses.filter((expense) => {
+      let nameResult =
+        expense.expense_name
+          .toLowerCase()
+          .indexOf(this.state.searchTerm.toLowerCase()) !== -1;
+
+      return nameResult;
+    });
+
+    this.setState({
+      searchResults: [...filteredData],
+    });
+
+    // console.log('filteredData: ', filteredData);
+    //Search through allExpenses arr and update searchResults arr
+  };
+
   render() {
     return (
       <>
@@ -646,6 +667,7 @@ export default class ExpenseApp extends Component {
         {this.state.currentUser ? (
           <Expenses
             expenses={this.state.expenses}
+            allExpenses={this.state.allExpenses}
             handleFormChange={this.handleFormChange}
             addExpense={this.addExpense}
             startDate={this.state.startDate}
@@ -678,6 +700,9 @@ export default class ExpenseApp extends Component {
             toggleDropdownMenu={this.toggleDropdownMenu}
             income_total={this.state.income_total}
             updateIncome={this.updateIncome}
+            searchTerm={this.state.searchTerm}
+            filterSearchData={this.filterSearchData}
+            searchResults={this.state.searchResults}
           />
         ) : (
           <>

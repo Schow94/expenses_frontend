@@ -10,6 +10,8 @@ import AddIncomeForm from './AddIncomeForm';
 import CategoryBreakdownItem from './CategoryBreakdownItem';
 import PieGraph from './PieGraph';
 import Table from './Table';
+import SearchBar from './SearchBar';
+import SearchResults from './SearchResults';
 
 import { ResponsiveContainer } from 'recharts';
 
@@ -53,6 +55,10 @@ export default class Expenses extends Component {
       showDropdownMenu,
       income_total,
       updateIncome,
+      searchTerm,
+      allExpenses,
+      filterSearchData,
+      searchResults,
     } = this.props;
 
     //Move this logic to ExpenseApp.js state
@@ -108,37 +114,18 @@ export default class Expenses extends Component {
       'pink',
     ];
 
-    // const RADIAN = Math.PI / 180;
-    // const renderCustomizedLabel = ({
-    //   cx,
-    //   cy,
-    //   midAngle,
-    //   innerRadius,
-    //   outerRadius,
-    //   percent,
-    //   index,
-    // }) => {
-    //   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    //   const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    //   const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    //   return (
-    //     <text
-    //       x={x}
-    //       y={y}
-    //       fill="white"
-    //       textAnchor="middle"
-    //       dominantBaseline="central"
-    //     >
-    //       {`${(percent * 100).toFixed(0)}%`}
-    //     </text>
-    //   );
-    // };
-
     // console.log(catArr);
 
     return (
       <div className="expenses-container">
+        <SearchBar
+          searchTerm={searchTerm}
+          handleFormChange={handleFormChange}
+          filterSearchData={filterSearchData}
+        />
+
+        <SearchResults searchTerm={searchTerm} searchResults={searchResults} />
+
         {showIncomeForm ? (
           <AddIncomeForm
             toggleShowIncomeForm={toggleShowIncomeForm}
