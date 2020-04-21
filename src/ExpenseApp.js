@@ -318,6 +318,7 @@ export default class ExpenseApp extends Component {
       //Get expenses/currentUser after loggin in
       this.getCurrentUser();
       this.getAllExpenses();
+      this.getIncome();
       this.clearLoginForm();
 
       const loginErr = result['data']['message'];
@@ -645,8 +646,21 @@ export default class ExpenseApp extends Component {
           .toLowerCase()
           .indexOf(this.state.searchTerm.toLowerCase()) !== -1;
 
-      return nameResult;
+      let categoryResult =
+        expense.category
+          .toLowerCase()
+          .indexOf(this.state.searchTerm.toLowerCase()) !== -1;
+
+      let paidToResult =
+        expense.paid_to
+          .toLowerCase()
+          .indexOf(this.state.searchTerm.toLowerCase()) !== -1;
+
+      return nameResult || categoryResult || paidToResult;
     });
+
+    //Want to sort by date which is in unix time
+    // let sorted = filteredData.sort();
 
     this.setState({
       searchResults: [...filteredData],

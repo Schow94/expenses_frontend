@@ -8,10 +8,14 @@ export default class SearchBar extends Component {
     this.props.filterSearchData();
   };
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   render() {
     const { searchTerm } = this.props;
     return (
-      <form className="search-form">
+      <form className="search-form" onSubmit={(e) => this.handleSubmit(e)}>
         <input
           className="search-input"
           type="search"
