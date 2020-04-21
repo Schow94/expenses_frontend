@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { CSVLink } from 'react-csv';
 
 import AddExpenseForm from './AddExpenseForm';
 import YearSelector from './YearSelector';
@@ -59,6 +60,8 @@ export default class Expenses extends Component {
       allExpenses,
       filterSearchData,
       searchResults,
+      currentUser,
+      csvData,
     } = this.props;
 
     //Move this logic to ExpenseApp.js state
@@ -115,6 +118,15 @@ export default class Expenses extends Component {
     ];
 
     // console.log(catArr);
+
+    //Headers of CSV
+    const headers = [
+      { label: 'Expense', key: 'expense_name' },
+      { label: 'Price', key: 'price' },
+      { label: 'Category', key: 'category' },
+      { label: 'Paid To', key: 'paid_to' },
+      { label: 'Date', key: 'expense_date' },
+    ];
 
     return (
       <div className="expenses-container">
@@ -221,6 +233,19 @@ export default class Expenses extends Component {
             <DaySelector day={day} getDayExpenses={getDayExpenses} />
           ) : null}
         </div>
+
+        <CSVLink
+          className="csv-button"
+          data={csvData}
+          headers={headers}
+          filename={`${currentUser}_expenses${new Date()
+            .toDateString()
+            .slice(3, 15)
+            .split(' ')
+            .join('_')}.csv`}
+        >
+          Download CSV
+        </CSVLink>
 
         <div className="graph-table-container">
           <div className="graph-container">

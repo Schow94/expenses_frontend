@@ -223,6 +223,24 @@ button:hover {
   cursor: pointer;
 }
 
+.csv-button {
+  background-color: #22cef5;
+  color: black;
+  text-decoration: none;
+  width: 150px;
+  border-radius: 5px;
+  letter-spacing: 1px;
+  height: 65px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.csv-button:hover {
+  color: white;
+  background-color: #1db0d1;
+}
+
 /* ------------------------------ MEDIA QUERIES ------------------------------- */
 @media only screen and (max-width: 300px) {
   .expenses-container {
@@ -357,6 +375,15 @@ button:hover {
     height: 35px;
     border-radius: 5px;
     font-size: 1em;
+  }
+  .csv-button {
+    width: 100px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    height: 40px;
+    font-size: 0.8em;
+    margin-top: 2em;
+    margin-bottom: 3em;
   }
 }
 
@@ -497,6 +524,16 @@ button:hover {
     border-radius: 5px;
     font-size: 1em;
   }
+
+  .csv-button {
+    width: 120px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    height: 50px;
+    font-size: 1em;
+    margin-top: 2em;
+    margin-bottom: 3em;
+  }
 }
 
 @media only screen and (min-width: 450px) and (max-width: 650px) {
@@ -586,24 +623,382 @@ button:hover {
     width: 50%;
     margin-left: 30%;
   }
+  .csv-button {
+    width: 130px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    height: 55px;
+    font-size: 1em;
+    margin-top: 2em;
+    margin-bottom: 3em;
+  }
 }
 
 @media only screen and (min-width: 650px) and (max-width: 800px) {
+  .expenses-container {
+    margin-top: 8.5%;
+    margin-bottom: 1em;
+    padding-bottom: 2em;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+  }
+  .analytics-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+    width: 100%;
+    font-size: 1em;
+    padding-bottom: 2em;
+  }
+
+  .graph-table-container {
+    width: 100vw;
+  }
+
+  .graph-container {
+    width: 80%;
+    margin-left: 5%;
+    margin-bottom: 2em;
+  }
+  .edit-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .graph-table-container {
+    width: 100vw;
+  }
+
+  table {
+    margin-top: 30px;
+    width: 80%;
+    font-size: 8px;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  tr {
+  }
+
+  .table-header {
+    font-size: 1.4em;
+  }
+
+  th {
+    border: 1px solid black;
+    background-color: grey;
+  }
+
+  td {
+    font-size: 10px;
+    padding: 0;
+    border: 1px solid black;
+  }
+  .toggle-add-expense-btn {
+    width: 110px;
+    height: 4em;
+    font-size: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  .expenses-title {
+    text-align: center;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    font-size: 2em;
+  }
+
+  .category-breakdown {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 30%;
+  }
+  .csv-button {
+    width: 130px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    height: 55px;
+    font-size: 1em;
+    margin-top: 2em;
+    margin-bottom: 3em;
+  }
 }
 
 @media only screen and (min-width: 800px) and (max-width: 1000px) {
-}
+  .expenses-container {
+    margin-top: 8.5%;
+    margin-bottom: 1em;
+    padding-bottom: 2em;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+  }
+  .analytics-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+    width: 80%;
+    font-size: 1em;
+    padding-bottom: 2em;
+  }
 
-@media only screen and (min-width: 1000px) and (max-width: 1300px) {
-}
+  .graph-table-container {
+    width: 100vw;
+    padding-bottom: 6em;
+  }
 
-@media only screen and (min-width: 1300px) and (max-width: 1500px) {
+  .edit-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .graph-table-container {
+    width: 100vw;
+  }
+
+  .graph-container {
+    width: 80%;
+    margin-left: 5%;
+    margin-bottom: 2em;
+    margin-top: 2em;
+  }
+
+  table {
+    margin-top: 5%;
+    width: 80%;
+    font-size: 12px;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  tr {
+  }
+
+  .table-header {
+    font-size: 1.4em;
+  }
+
+  th {
+    border: 1px solid black;
+    background-color: grey;
+  }
+
+  td {
+    font-size: 10px;
+    padding: 0;
+    border: 1px solid black;
+  }
+  .toggle-add-expense-btn {
+    width: 110px;
+    height: 4em;
+    font-size: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  .expenses-title {
+    text-align: center;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    font-size: 2em;
+  }
+
   .category-breakdown {
     width: 40%;
     padding-bottom: 2em;
     padding-right: 15%;
     margin-right: 1em;
   }
+  .csv-button {
+    width: 130px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    height: 55px;
+    font-size: 1em;
+    margin-top: 2em;
+    margin-bottom: 3em;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1300px) {
+  .expenses-container {
+    margin-top: 8.5%;
+    margin-bottom: 1em;
+    padding-bottom: 2em;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+  }
+  .analytics-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+    width: 80%;
+    font-size: 1em;
+    padding-bottom: 2em;
+  }
+
+  .graph-table-container {
+    width: 100vw;
+    padding-bottom: 6em;
+  }
+
+  .edit-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .graph-table-container {
+    width: 100vw;
+  }
+
+  .graph-container {
+    width: 80%;
+    margin-left: 5%;
+    margin-bottom: 2em;
+    margin-top: 2em;
+  }
+
+  table {
+    margin-top: 5%;
+    width: 80%;
+    font-size: 12px;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+  tr {
+  }
+
+  .table-header {
+    font-size: 1.4em;
+  }
+
+  th {
+    border: 1px solid black;
+    background-color: grey;
+  }
+
+  td {
+    font-size: 10px;
+    padding: 0;
+    border: 1px solid black;
+  }
+  .toggle-add-expense-btn {
+    width: 110px;
+    height: 4em;
+    font-size: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  .expenses-title {
+    text-align: center;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    font-size: 2em;
+  }
+
+  .category-breakdown {
+    width: 40%;
+    padding-bottom: 2em;
+    padding-right: 8%;
+    padding-left: 10%;
+    font-size: 1em;
+    line-height: 2em;
+  }
+
+  .csv-button {
+    width: 130px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    height: 55px;
+    font-size: 1em;
+    margin-top: 2em;
+    margin-bottom: 3em;
+  }
+}
+
+@media only screen and (min-width: 1300px) and (max-width: 1500px) {
+  .expenses-container {
+    margin-top: 8.5%;
+    margin-bottom: 1em;
+    padding-bottom: 2em;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+  }
+
+  .graph-table-container {
+    width: 100vw;
+    padding-bottom: 6em;
+  }
+
+  .edit-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  tr {
+  }
+
+  .table-header {
+    font-size: 1.4em;
+  }
+
+  th {
+    border: 1px solid black;
+    background-color: grey;
+  }
+
+  td {
+    font-size: 10px;
+    padding: 0;
+    border: 1px solid black;
+  }
+  .toggle-add-expense-btn {
+    width: 110px;
+    height: 4em;
+    font-size: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  .expenses-title {
+    text-align: center;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    font-size: 2em;
+  }
+
+  .category-breakdown {
+    width: 40%;
+    padding-bottom: 2em;
+    padding-right: 15%;
+    margin-right: 1em;
+    padding-left: 10%;
+    font-size: 1em;
+    line-height: 2em;
+  }
 
   table {
     margin-top: 5%;
@@ -630,16 +1025,40 @@ button:hover {
     width: 80%;
     font-size: 1em;
     padding-bottom: 2em;
+  }
+  .csv-button {
+    width: 130px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    height: 55px;
+    font-size: 1em;
+    margin-top: 2em;
+    margin-bottom: 3em;
+    letter-spacing: 1px;
   }
 }
 
 @media only screen and (min-width: 1500px) {
-  .category-breakdown {
-    width: 20%;
+  .expenses-container {
+    margin-top: 8.5%;
+    margin-bottom: 1em;
     padding-bottom: 2em;
-    /* background-color: green; */
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+  }
+
+  .category-breakdown {
+    width: 40%;
+    padding-bottom: 2em;
     padding-right: 15%;
+    margin-top: 3em;
     margin-right: 1em;
+    padding-left: 10%;
+    font-size: 1em;
+    line-height: 2em;
   }
 
   table {
@@ -667,5 +1086,59 @@ button:hover {
     width: 80%;
     font-size: 1em;
     padding-bottom: 2em;
+  }
+
+  .graph-table-container {
+    width: 100vw;
+    padding-bottom: 6em;
+  }
+
+  .edit-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  tr {
+  }
+
+  .table-header {
+    font-size: 1.4em;
+  }
+
+  th {
+    border: 1px solid black;
+    background-color: grey;
+  }
+
+  td {
+    font-size: 10px;
+    padding: 0;
+    border: 1px solid black;
+  }
+  .toggle-add-expense-btn {
+    width: 110px;
+    height: 4em;
+    font-size: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  .expenses-title {
+    text-align: center;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    font-size: 2em;
+  }
+
+  .csv-button {
+    width: 130px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    height: 55px;
+    font-size: 1em;
+    margin-top: 2em;
+    margin-bottom: 3em;
+    letter-spacing: 1px;
   }
 }

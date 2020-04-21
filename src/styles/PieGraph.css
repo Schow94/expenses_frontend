@@ -28,15 +28,25 @@
 }
 
 @media only screen and (min-width: 650px) and (max-width: 800px) {
+  .pie-graph-container {
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+  }
 }
 
 @media only screen and (min-width: 800px) and (max-width: 1000px) {
+  .pie-graph-container {
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+  }
 }
 
 @media only screen and (min-width: 1000px) and (max-width: 1300px) {
   .pie-graph-container {
     justify-content: center;
-    width: 70%;
+    width: 60%;
     margin: 0;
   }
 }
@@ -44,7 +54,7 @@
 @media only screen and (min-width: 1300px) and (max-width: 1500px) {
   .pie-graph-container {
     justify-content: center;
-    width: 80%;
+    width: 90%;
     margin: 0;
   }
 }

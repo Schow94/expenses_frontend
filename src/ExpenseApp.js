@@ -9,12 +9,6 @@ import SignUp from './SignUp';
 import Navbar from './Navbar';
 import Landing from './Landing';
 
-// let API_URL;
-// if (process.env.NODE_ENV === 'production') {
-//   API_URL = process.env.REACT_APP_API_URL;
-// } else if (process.env.NODE_ENV === 'development') {
-//   API_URL = process.env.REACT_APP_LOCAL_API_URL;
-// }
 const API_URL = process.env.REACT_APP_API_URL;
 
 export default class ExpenseApp extends Component {
@@ -39,7 +33,6 @@ export default class ExpenseApp extends Component {
       year: 'ALL',
       month: 'ALL',
       day: 'ALL',
-      graphData: [],
       showAccountInfo: false,
       showIncomeForm: false,
       showDropdownMenu: false,
@@ -49,6 +42,7 @@ export default class ExpenseApp extends Component {
       income_total: 0,
       searchTerm: '',
       searchResults: [],
+      csvData: [],
     };
   }
 
@@ -105,12 +99,14 @@ export default class ExpenseApp extends Component {
     try {
       const token = JSON.parse(localStorage.getItem('token'));
 
+      //Data from API
       const result = await axios({
         method: 'get',
         url: `${API_URL}/expenses`,
         headers: { Authorization: `Bearer ${token}` },
       });
 
+      // Save prices for graphs
       const prices = result.data.map((val) => {
         const obj = {};
         const date = new Date(val.expense_date * 1000);
@@ -120,7 +116,25 @@ export default class ExpenseApp extends Component {
         return obj;
       });
 
+      //Format data to be saved to CSV
+      const csvData = result.data.map((val) => {
+        let obj = {};
+        let dateObj = new Date(val.expense_date * 1000);
+        let year = dateObj.getFullYear().toString();
+        let month = (dateObj.getMonth() + 1).toString();
+        let day = dateObj.getDate().toString();
+
+        obj['expense_name'] = val.expense_name;
+        obj['price'] = val.price;
+        obj['category'] = val.category;
+        obj['paid_to'] = val.paid_to;
+        obj['expense_date'] = `${month}-${day}-${year}`;
+
+        return obj;
+      });
+
       this.setState({
+        csvData: csvData,
         graphData: [...prices],
         expenses: [...result.data],
         allExpenses: [...result.data],
@@ -425,6 +439,7 @@ export default class ExpenseApp extends Component {
     });
   };
 
+  //Move logic to state
   formatGraphData = () => {
     const data = this.state.expenses.map((val) => {
       return val;
@@ -723,6 +738,8 @@ export default class ExpenseApp extends Component {
             searchTerm={this.state.searchTerm}
             filterSearchData={this.filterSearchData}
             searchResults={this.state.searchResults}
+            currentUser={this.state.currentUser}
+            csvData={this.state.csvData}
           />
         ) : (
           <>
