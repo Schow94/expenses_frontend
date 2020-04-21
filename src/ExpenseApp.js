@@ -55,6 +55,9 @@ export default class ExpenseApp extends Component {
   componentDidMount() {
     console.log('Component Mounted');
 
+    console.log(process.env.NODE_ENV, process.env.REACT_APP_API_URL, API_URL);
+    console.log('TESTING CHANGES');
+
     try {
       const token = JSON.parse(localStorage.getItem('token'));
       if (token) {
