@@ -10,10 +10,10 @@ import Navbar from './Navbar';
 import Landing from './Landing';
 
 let API_URL;
-if (process.env.NODE_ENV === 'development') {
-  API_URL = process.env.REACT_APP_LOCAL_API_URL;
-} else if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
   API_URL = process.env.REACT_APP_API_URL;
+} else if (process.env.NODE_ENV === 'development') {
+  API_URL = process.env.REACT_APP_LOCAL_API_URL;
 }
 
 export default class ExpenseApp extends Component {
