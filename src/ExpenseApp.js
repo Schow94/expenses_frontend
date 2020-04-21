@@ -53,7 +53,6 @@ export default class ExpenseApp extends Component {
 
   componentDidMount() {
     console.log('Component Mounted');
-    console.log('API URL: ', API_URL);
     try {
       const token = JSON.parse(localStorage.getItem('token'));
       if (token) {
