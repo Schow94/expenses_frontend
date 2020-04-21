@@ -12,8 +12,6 @@ import Landing from './Landing';
 let API_URL;
 if (process.env.NODE_ENV === 'production') {
   API_URL = process.env.REACT_APP_API_URL;
-} else if (process.env.NODE_ENV === 'development') {
-  API_URL = process.env.REACT_APP_LOCAL_API_URL;
 }
 
 export default class ExpenseApp extends Component {
@@ -53,6 +51,9 @@ export default class ExpenseApp extends Component {
 
   componentDidMount() {
     console.log('Component Mounted');
+
+    console.log(process.env.NODE_ENV, process.env.REACT_APP_API_URL, API_URL);
+
     try {
       const token = JSON.parse(localStorage.getItem('token'));
       if (token) {
