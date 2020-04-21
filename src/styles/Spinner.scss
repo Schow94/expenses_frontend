@@ -1,0 +1,208 @@
+$green: #008744;
+$blue: #0057e7;
+$red: #d62d20;
+$yellow: #ffa700;
+$white: #eee;
+
+// scaling... any units
+$threehundredWidth: 50px;
+$eighthundredWidth: 100px;
+$sixfiftyWidth: 150px;
+$fifteenhundredWidth: 250px;
+
+.loader {
+  position: relative;
+  margin: 0 auto;
+  margin-top: 20%;
+  width: $eighthundredWidth;
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+}
+
+.circular {
+  animation: rotate 2s linear infinite;
+  height: 100%;
+  transform-origin: center center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+}
+
+@keyframes color {
+  100%,
+  0% {
+    stroke: $red;
+  }
+  40% {
+    stroke: $blue;
+  }
+  66% {
+    stroke: $green;
+  }
+  80%,
+  90% {
+    stroke: $yellow;
+  }
+}
+
+// demo-specific
+body {
+  background-color: $white;
+}
+.showbox {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 5%;
+  margin-top: 4em;
+}
+
+/* ------------------------------ MEDIA QUERIES ------------------------------- */
+@media only screen and (max-width: 300px) {
+  .loader {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 40%;
+    width: $threehundredWidth;
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 450px) {
+  .loader {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 40%;
+    width: $eighthundredWidth;
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+  }
+}
+
+@media only screen and (min-width: 450px) and (max-width: 650px) {
+  .loader {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 30%;
+    width: $sixfiftyWidth;
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+  }
+}
+
+@media only screen and (min-width: 650px) and (max-width: 800px) {
+  .loader {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 30%;
+    width: $sixfiftyWidth;
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+  }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1000px) {
+  .loader {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 20%;
+    width: $sixfiftyWidth;
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1300px) {
+  .loader {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 15%;
+    width: $sixfiftyWidth;
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1300px) and (max-width: 1500px) {
+  .loader {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 15%;
+    width: $sixfiftyWidth;
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  .loader {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 10%;
+    width: $fifteenhundredWidth;
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+  }
+}

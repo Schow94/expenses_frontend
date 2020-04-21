@@ -8,6 +8,7 @@ import Login from './Login';
 import SignUp from './SignUp';
 import Navbar from './Navbar';
 import Landing from './Landing';
+import Spinner from './Spinner';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -43,18 +44,19 @@ export default class ExpenseApp extends Component {
       searchTerm: '',
       searchResults: [],
       csvData: [],
+      isLoading: false,
     };
   }
 
   componentDidMount() {
     console.log('Component Mounted');
-
     try {
       const token = JSON.parse(localStorage.getItem('token'));
       if (token) {
         this.getCurrentUser();
         this.getAllExpenses();
         this.getIncome();
+        this.hasLoaded();
       }
     } catch (e) {
       console.log(e);
@@ -133,13 +135,16 @@ export default class ExpenseApp extends Component {
         return obj;
       });
 
-      this.setState({
-        csvData: csvData,
-        graphData: [...prices],
-        expenses: [...result.data],
-        allExpenses: [...result.data],
-        startDate: new Date(),
-      });
+      this.setState(
+        {
+          csvData: csvData,
+          graphData: [...prices],
+          expenses: [...result.data],
+          allExpenses: [...result.data],
+          startDate: new Date(),
+        },
+        this.hasLoaded()
+      );
     } catch (e) {
       console.log(e);
     }
@@ -389,7 +394,7 @@ export default class ExpenseApp extends Component {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      this.getExpenses();
+      this.getAllExpenses();
 
       //Clear inputs after adding expense
       this.setState({
@@ -424,7 +429,7 @@ export default class ExpenseApp extends Component {
 
     //Get expenses/currentUser after loggin in
     this.getCurrentUser();
-    this.getExpenses();
+    this.getAllExpenses();
 
     this.setState({
       emai: '',
@@ -460,7 +465,7 @@ export default class ExpenseApp extends Component {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      this.getExpenses();
+      this.getAllExpenses();
     } catch (e) {
       console.log(e);
     }
@@ -492,7 +497,7 @@ export default class ExpenseApp extends Component {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      this.getExpenses();
+      this.getAllExpenses();
 
       //Clear inputs after adding expense
     } catch (e) {
@@ -513,7 +518,7 @@ export default class ExpenseApp extends Component {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      this.getExpenses();
+      this.getAllExpenses();
 
       //Clear inputs after adding expense
     } catch (e) {
@@ -534,7 +539,7 @@ export default class ExpenseApp extends Component {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      this.getExpenses();
+      this.getAllExpenses();
 
       //Clear inputs after adding expense
     } catch (e) {
@@ -555,7 +560,7 @@ export default class ExpenseApp extends Component {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      this.getExpenses();
+      this.getAllExpenses();
 
       //Clear inputs after adding expense
     } catch (e) {
@@ -579,7 +584,7 @@ export default class ExpenseApp extends Component {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      this.getExpenses();
+      this.getAllExpenses();
 
       //Clear inputs after adding expense
     } catch (e) {
@@ -691,6 +696,20 @@ export default class ExpenseApp extends Component {
     //Search through allExpenses arr and update searchResults arr
   };
 
+  loading = () => {
+    this.setState({
+      isLoading: true,
+    });
+  };
+
+  hasLoaded = () => {
+    const timer = setTimeout(() => {
+      this.setState({
+        isLoading: false,
+      });
+    }, 500);
+  };
+
   render() {
     return (
       <>
@@ -699,7 +718,9 @@ export default class ExpenseApp extends Component {
           logout={this.logout}
           toggleDropdownMenu={this.toggleDropdownMenu}
         />
-        {this.state.currentUser ? (
+        {this.state.isLoading ? (
+          <Spinner />
+        ) : this.state.currentUser ? (
           <Expenses
             expenses={this.state.expenses}
             allExpenses={this.state.allExpenses}
@@ -748,11 +769,13 @@ export default class ExpenseApp extends Component {
                 loginError={this.state.loginError}
                 login={this.login}
                 handleLogin={this.handleFormChange}
+                loading={this.loading}
               />
             ) : this.state.showSignupForm ? (
               <SignUp
                 handleSignup={this.handleFormChange}
                 createAccount={this.createAccount}
+                loading={this.loading}
               />
             ) : (
               <Landing

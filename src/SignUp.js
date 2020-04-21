@@ -11,6 +11,7 @@ export default class SignUp extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.createAccount();
+    this.props.loading();
   };
 
   render() {
@@ -35,7 +36,7 @@ export default class SignUp extends Component {
             value={this.props.username}
           ></input>
           <input
-            type="text"
+            type="password"
             placeholder="Choose a password"
             autoComplete="off"
             onChange={(e) => this.handleChange(e)}

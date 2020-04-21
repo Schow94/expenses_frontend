@@ -748,9 +748,18 @@ button:hover {
     flex-direction: row;
     margin-top: 0.5em;
     margin-bottom: 2em;
-    width: 80%;
+    width: 100%;
     font-size: 1em;
     padding-bottom: 2em;
+  }
+
+  .category-breakdown {
+    width: 25%;
+    padding-bottom: 2em;
+    padding-right: 15%;
+    margin-right: 1em;
+    margin-left: 2%;
+    /* background-color: blue; */
   }
 
   .graph-table-container {
@@ -815,18 +824,12 @@ button:hover {
     font-size: 2em;
   }
 
-  .category-breakdown {
-    width: 40%;
-    padding-bottom: 2em;
-    padding-right: 15%;
-    margin-right: 1em;
-  }
   .csv-button {
     width: 130px;
     border-radius: 5px;
     letter-spacing: 1px;
     height: 55px;
-    font-size: 1em;
+    font-size: 0.9em;
     margin-top: 2em;
     margin-bottom: 3em;
   }
@@ -848,9 +851,16 @@ button:hover {
     flex-direction: row;
     margin-top: 0.5em;
     margin-bottom: 2em;
-    width: 80%;
+    width: 100%;
     font-size: 1em;
     padding-bottom: 2em;
+  }
+
+  .category-breakdown {
+    width: 50%;
+    font-size: 1.1em;
+    line-height: 2.2em;
+    margin-left: 8%;
   }
 
   .graph-table-container {
@@ -915,21 +925,12 @@ button:hover {
     font-size: 2em;
   }
 
-  .category-breakdown {
-    width: 40%;
-    padding-bottom: 2em;
-    padding-right: 8%;
-    padding-left: 10%;
-    font-size: 1em;
-    line-height: 2em;
-  }
-
   .csv-button {
-    width: 130px;
+    width: 135px;
     border-radius: 5px;
     letter-spacing: 1px;
     height: 55px;
-    font-size: 1em;
+    font-size: 0.9em;
     margin-top: 2em;
     margin-bottom: 3em;
   }
@@ -990,14 +991,21 @@ button:hover {
     font-size: 2em;
   }
 
-  .category-breakdown {
-    width: 40%;
-    padding-bottom: 2em;
-    padding-right: 15%;
-    margin-right: 1em;
-    padding-left: 10%;
+  .analytics-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+    width: 100%;
     font-size: 1em;
+    padding-bottom: 2em;
+  }
+
+  .category-breakdown {
+    width: 50%;
+    font-size: 1.1em;
     line-height: 2em;
+    margin-left: 8%;
   }
 
   table {
@@ -1017,21 +1025,12 @@ button:hover {
     padding-bottom: 6em;
   }
 
-  .analytics-container {
-    display: flex;
-    flex-direction: row;
-    margin-top: 0.5em;
-    margin-bottom: 2em;
-    width: 80%;
-    font-size: 1em;
-    padding-bottom: 2em;
-  }
   .csv-button {
-    width: 130px;
+    width: 150px;
     border-radius: 5px;
     letter-spacing: 1px;
-    height: 55px;
-    font-size: 1em;
+    height: 65px;
+    font-size: 0.9em;
     margin-top: 2em;
     margin-bottom: 3em;
     letter-spacing: 1px;
@@ -1051,14 +1050,21 @@ button:hover {
   }
 
   .category-breakdown {
-    width: 40%;
-    padding-bottom: 2em;
-    padding-right: 15%;
+    width: 45%;
     margin-top: 3em;
-    margin-right: 1em;
-    padding-left: 10%;
     font-size: 1em;
     line-height: 2em;
+    margin-left: 10%;
+  }
+
+  .analytics-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+    width: 100%;
+    font-size: 1em;
+    padding-bottom: 2em;
   }
 
   table {
@@ -1076,16 +1082,6 @@ button:hover {
   }
   .graph-table-container {
     padding-bottom: 6em;
-  }
-
-  .analytics-container {
-    display: flex;
-    flex-direction: row;
-    margin-top: 0.5em;
-    margin-bottom: 2em;
-    width: 80%;
-    font-size: 1em;
-    padding-bottom: 2em;
   }
 
   .graph-table-container {
@@ -1132,10 +1128,10 @@ button:hover {
   }
 
   .csv-button {
-    width: 130px;
+    width: 165px;
     border-radius: 5px;
     letter-spacing: 1px;
-    height: 55px;
+    height: 75px;
     font-size: 1em;
     margin-top: 2em;
     margin-bottom: 3em;
