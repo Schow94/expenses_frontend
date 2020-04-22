@@ -65,6 +65,7 @@ export default class ExpenseApp extends Component {
 
   componentDidUpdate() {
     console.log('Component Updated');
+    console.log(this.state);
   }
 
   componentWillUnmount() {}
@@ -319,6 +320,7 @@ export default class ExpenseApp extends Component {
   };
 
   clearLoginForm = () => {
+    console.log('clearLoginForm');
     this.setState({
       username: '',
       password: '',
@@ -344,17 +346,19 @@ export default class ExpenseApp extends Component {
       this.getCurrentUser();
       this.getAllExpenses();
       this.getIncome();
-      this.clearLoginForm();
+      // this.clearLoginForm();
 
       const loginErr = result['data']['message'];
       if (loginErr) {
+        console.log('Theres a login err');
         this.setState({
           loginError: loginErr,
-          username: '',
-          password: '',
+          // username: '',
+          // password: '',
         });
       } else {
         // Use username/password state only for handling input
+        console.log('There are no login errors');
         this.setState({
           loginError: '',
           username: '',
@@ -710,6 +714,12 @@ export default class ExpenseApp extends Component {
     }, 500);
   };
 
+  clearLoginErr = () => {
+    this.setState({
+      loginError: '',
+    });
+  };
+
   render() {
     return (
       <>
@@ -767,9 +777,13 @@ export default class ExpenseApp extends Component {
             {this.state.showLoginForm ? (
               <Login
                 loginError={this.state.loginError}
+                clearLoginErr={this.clearLoginErr}
                 login={this.login}
                 handleLogin={this.handleFormChange}
                 loading={this.loading}
+                clearLoginForm={this.clearLoginForm}
+                username={this.state.username}
+                password={this.state.password}
               />
             ) : this.state.showSignupForm ? (
               <SignUp

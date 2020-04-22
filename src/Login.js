@@ -9,9 +9,24 @@ export default class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.login();
-    this.props.loading();
+    this.props.clearLoginErr();
+    this.props.login().then(() => {
+      if (!this.props.loginError) {
+        this.props.loading();
+      }
+    });
+
+    this.props.clearLoginForm();
   };
+
+  componentDidMount() {
+    console.log('Login Mounted');
+  }
+
+  componentDidUpdate() {
+    console.log('Login Updated');
+    console.log(this.props);
+  }
 
   render() {
     const { loginError } = this.props;
