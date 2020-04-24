@@ -25,7 +25,6 @@ export default class Login extends Component {
 
   componentDidUpdate() {
     console.log('Login Updated');
-    console.log(this.props);
   }
 
   render() {

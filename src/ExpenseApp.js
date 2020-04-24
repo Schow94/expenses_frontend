@@ -10,6 +10,8 @@ import Navbar from './Navbar';
 import Landing from './Landing';
 import Spinner from './Spinner';
 
+import './styles/ExpenseApp.css';
+
 const API_URL = process.env.REACT_APP_API_URL;
 
 export default class ExpenseApp extends Component {
@@ -65,7 +67,6 @@ export default class ExpenseApp extends Component {
 
   componentDidUpdate() {
     console.log('Component Updated');
-    console.log(this.state);
   }
 
   componentWillUnmount() {}
@@ -721,6 +722,7 @@ export default class ExpenseApp extends Component {
   };
 
   render() {
+    const { contentCached, updateAvailable } = this.props;
     return (
       <>
         <Navbar
@@ -728,10 +730,13 @@ export default class ExpenseApp extends Component {
           logout={this.logout}
           toggleDropdownMenu={this.toggleDropdownMenu}
         />
+
         {this.state.isLoading ? (
           <Spinner />
         ) : this.state.currentUser ? (
           <Expenses
+            // contentCached={contentCached}
+            // updateAvailable={updateAvailable}
             expenses={this.state.expenses}
             allExpenses={this.state.allExpenses}
             handleFormChange={this.handleFormChange}

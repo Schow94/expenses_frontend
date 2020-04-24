@@ -1,0 +1,13 @@
+.update-container {
+  color: black;
+  background-color: rgb(226, 146, 146);
+  margin-top: 5em;
+  text-align: center;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 25%;
+  border-radius: 10px;
+}

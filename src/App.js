@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
+
 import ExpenseApp from './ExpenseApp';
 
-export default class App extends Component {
+class App extends Component {
   render() {
-    return <ExpenseApp />;
+
+    return (
+      <ExpenseApp
+      />
+    );
   }
 }
+
+
+export default App;

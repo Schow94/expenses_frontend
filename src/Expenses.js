@@ -13,6 +13,9 @@ import PieGraph from './PieGraph';
 import Table from './Table';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
+import Upload from './Upload';
+import CustomTextInput from './CustomTextInput';
+import AutoFocusTextInput from './AutoFocusTextInput';
 
 import { ResponsiveContainer } from 'recharts';
 
@@ -135,8 +138,9 @@ export default class Expenses extends Component {
           handleFormChange={handleFormChange}
           filterSearchData={filterSearchData}
         />
-
         <SearchResults searchTerm={searchTerm} searchResults={searchResults} />
+
+        <Upload />
 
         {showIncomeForm ? (
           <AddIncomeForm
