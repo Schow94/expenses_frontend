@@ -14,47 +14,60 @@ export default class Dropzone extends Component {
     this.onDrop = this.onDrop.bind(this);
   }
 
+  //Opens file dialog
   openFileDialog() {
     if (this.props.disabled) return;
     this.fileInputRef.current.click();
   }
 
-  onFilesAdded(evt) {
+  onFilesAdded(e) {
     if (this.props.disabled) return;
-    const files = evt.target.files;
+
     if (this.props.onFilesAdded) {
-      const array = this.fileListToArray(files);
+      //Adds files to an array
+      const array = this.fileListToArray(e.target.files);
+
+      //Pass array to parent component
       this.props.onFilesAdded(array);
     }
   }
 
-  onDragOver(event) {
-    event.preventDefault();
-    if (this.props.disabed) return;
-    this.setState({ hightlight: true });
-  }
-
-  onDragLeave(event) {
-    this.setState({ hightlight: false });
-  }
-
-  onDrop(event) {
-    event.preventDefault();
-    if (this.props.disabed) return;
-    const files = event.dataTransfer.files;
-    if (this.props.onFilesAdded) {
-      const array = this.fileListToArray(files);
-      this.props.onFilesAdded(array);
-    }
-    this.setState({ hightlight: false });
-  }
-
+  //Adds all files to an arr so it's easier to handle
   fileListToArray(list) {
     const array = [];
     for (var i = 0; i < list.length; i++) {
       array.push(list.item(i));
     }
     return array;
+  }
+
+  // ----------------------------------------- DRAG FUNCTIONS ----------------------------------------------
+
+  onDragOver(event) {
+    event.preventDefault();
+    if (this.props.disabed) return;
+    this.setState({
+      hightlight: true,
+    });
+  }
+
+  onDragLeave(event) {
+    this.setState({
+      hightlight: false,
+    });
+  }
+
+  onDrop(e) {
+    e.preventDefault();
+    if (this.props.disabed) return;
+
+    if (this.props.onFilesAdded) {
+      this.props.onFilesAdded(this.fileListToArray(e.dataTransfer.files));
+    }
+
+    this.setState({
+      hightlight: false,
+    });
   }
 
   render() {
@@ -65,7 +78,9 @@ export default class Dropzone extends Component {
         onDragLeave={this.onDragLeave}
         onDrop={this.onDrop}
         onClick={this.openFileDialog}
-        style={{ cursor: this.props.disabled ? 'default' : 'pointer' }}
+        style={{
+          cursor: this.props.disabled ? 'default' : 'pointer',
+        }}
       >
         <input
           ref={this.fileInputRef}

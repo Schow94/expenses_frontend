@@ -19,60 +19,105 @@ export default class Upload extends Component {
     this.renderActions = this.renderActions.bind(this);
   }
 
+  //Adds file from child file uploader to state represented as an array of files
   onFilesAdded(files) {
-    this.setState((prevState) => ({
+    this.setState({
       files: [this.state.files, ...files],
-    }));
-    console.log(files);
+    });
   }
 
+  // Upload files to browser
+  //async because not sure how long it'll take
   async uploadFiles() {
-    this.setState({ uploadProgress: {}, uploading: true });
+    //Reset upload state before uploading new files
+    this.setState({
+      uploadProgress: {},
+      uploading: true,
+    });
+
+    //Create arr of files
     const promises = [];
     this.state.files.forEach((file) => {
+      // sendRequest is async since sending files to server
       promises.push(this.sendRequest(file));
     });
+
     try {
+      // wait until all files have been added to arr
       await Promise.all(promises);
 
-      this.setState({ successfullUploaded: true, uploading: false });
+      // Once finished uploading, change successfullUploaded state
+      this.setState({
+        successfullUploaded: true,
+        uploading: false,
+      });
     } catch (e) {
       // Not Production ready! Do some error handling here instead...
-      this.setState({ successfullUploaded: true, uploading: false });
+      this.setState({
+        successfullUploaded: true,
+        uploading: false,
+      });
     }
   }
 
-  //Convert this to axios later
+  //Send files to server
   sendRequest(file) {
+    //Each file being sent to the server  creates its own promise
+    const token = JSON.parse(localStorage.getItem('token'));
+
     return new Promise((resolve, reject) => {
       //Create a new XHR upload obj
-      const XHR = new XMLHttpRequest().upload;
+      const XHR = new XMLHttpRequest();
+      const request = XHR.upload;
 
+      // ------------- Event handlers here are simply to get progress for progress bar ------------------
       //Event listener added to track progress
-      XHR.addEventListener('progress', (event) => {
+      request.addEventListener('progress', (event) => {
+        //Bool that checks if event has a length that can be calculated
         if (event.lengthComputable) {
+          //Create obj called copy & store in state to keep track of progress
           const copy = { ...this.state.uploadProgress };
+
+          //Each file will have it's progress updated in state from pending (0%) to done (100%)
           copy[file.name] = {
             state: 'pending',
             percentage: (event.loaded / event.total) * 100,
           };
-          this.setState({ uploadProgress: copy });
+
+          this.setState(
+            {
+              uploadProgress: copy,
+            },
+            () => {
+              console.log(this.state.uploadProgress);
+            }
+          );
         }
       });
 
-      //Event listener to check that files loaded
-      XHR.addEventListener('load', (event) => {
+      //Event listener to check that files loaded (100%)
+      request.addEventListener('load', (event) => {
         const copy = { ...this.state.uploadProgress };
+
         copy[file.name] = { state: 'done', percentage: 100 };
-        this.setState({ uploadProgress: copy });
+
+        this.setState({
+          uploadProgress: copy,
+        });
+
         resolve(XHR.response);
       });
 
       //Event listener to check for errors uploading files
-      XHR.addEventListener('error', (event) => {
+      request.addEventListener('error', (event) => {
         const copy = { ...this.state.uploadProgress };
+
         copy[file.name] = { state: 'error', percentage: 0 };
-        this.setState({ uploadProgress: copy });
+
+        this.setState({
+          uploadProgress: copy,
+        });
+
         reject(XHR.response);
       });
 
@@ -81,20 +126,28 @@ export default class Upload extends Component {
       formData.append('file', file, file.name);
 
       //Creates a new or pre-existing POST request
+
       XHR.open('POST', 'http://localhost:5000/expenses/upload');
+      //token is not being attached properly
+      XHR.setRequestHeader('Authorization', 'Bearer ' + token);
 
       //Sends request to server
       XHR.send(formData);
+      this.props.getAllExpenses();
     });
   }
 
+  // Pull out upload status & render a display bar
   renderProgress(file) {
     const uploadProgress = this.state.uploadProgress[file.name];
+
     if (this.state.uploading || this.state.successfullUploaded) {
       return (
         <div className="ProgressWrapper">
           <Progress progress={uploadProgress ? uploadProgress.percentage : 0} />
+
           {uploadProgress ? `${uploadProgress.percentage.toFixed(0)}%` : 0}
+
           <img
             className="CheckIcon"
             alt="done"
@@ -109,21 +162,27 @@ export default class Upload extends Component {
     }
   }
 
+  //Clear files so you can upload more
+  clearFiles = () => {
+    this.setState({
+      files: [],
+      successfullUploaded: false,
+    });
+  };
+
+  // Renders a diff button depending if files were uploaded successfully or not
   renderActions() {
+    // if files uploaded successfully, clear files arr/cache in state
     if (this.state.successfullUploaded) {
+      return <button onClick={this.clearFiles}>Clear</button>;
+    }
+    //If files not uploaded successfully yet, send files to server
+    else {
       return (
         <button
-          onClick={() =>
-            this.setState({ files: [], successfullUploaded: false })
-          }
-        >
-          Clear
-        </button>
-      );
-    } else {
-      return (
-        <button
+          //Disable button if files are uploading or theres no files to upload yet
           disabled={this.state.files.length < 0 || this.state.uploading}
+          // Clicking button triggers upload to server
           onClick={this.uploadFiles}
         >
           Upload
@@ -135,7 +194,8 @@ export default class Upload extends Component {
   render() {
     return (
       <div className="Upload">
-        {/* <span className="Title">Upload Files</span> */}
+        <span className="Title">Upload Files</span>
+
         <div className="Content">
           <div>
             <Dropzone
@@ -143,6 +203,8 @@ export default class Upload extends Component {
               disabled={this.state.uploading || this.state.successfullUploaded}
             />
           </div>
+
+          {/* Map through files array to display to user what they selected for upload */}
           <div className="Files">
             {this.state.files.map((file, i) => {
               return (
@@ -154,6 +216,8 @@ export default class Upload extends Component {
             })}
           </div>
         </div>
+
+        {/* Button to trigger upload to server */}
         <div className="Actions">{this.renderActions()}</div>
       </div>
     );

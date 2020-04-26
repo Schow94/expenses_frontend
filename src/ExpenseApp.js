@@ -632,12 +632,12 @@ export default class ExpenseApp extends Component {
   updateIncome = async (income) => {
     try {
       const token = JSON.parse(localStorage.getItem('token'));
-
+      console.log(typeof income);
       const result = await axios({
         method: 'post',
         url: `${API_URL}/users/income`,
         data: {
-          income_total: this.state.income_total,
+          income_total: Number(this.state.income_total),
         },
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -722,7 +722,6 @@ export default class ExpenseApp extends Component {
   };
 
   render() {
-    const { contentCached, updateAvailable } = this.props;
     return (
       <>
         <Navbar
@@ -776,6 +775,7 @@ export default class ExpenseApp extends Component {
             searchResults={this.state.searchResults}
             currentUser={this.state.currentUser}
             csvData={this.state.csvData}
+            getAllExpenses={this.getAllExpenses}
           />
         ) : (
           <>

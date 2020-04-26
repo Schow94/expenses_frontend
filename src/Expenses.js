@@ -14,8 +14,6 @@ import Table from './Table';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import Upload from './Upload';
-import CustomTextInput from './CustomTextInput';
-import AutoFocusTextInput from './AutoFocusTextInput';
 
 import { ResponsiveContainer } from 'recharts';
 
@@ -65,6 +63,7 @@ export default class Expenses extends Component {
       searchResults,
       currentUser,
       csvData,
+      getAllExpenses,
     } = this.props;
 
     //Move this logic to ExpenseApp.js state
@@ -140,7 +139,7 @@ export default class Expenses extends Component {
         />
         <SearchResults searchTerm={searchTerm} searchResults={searchResults} />
 
-        <Upload />
+        <Upload getAllExpenses={getAllExpenses} />
 
         {showIncomeForm ? (
           <AddIncomeForm

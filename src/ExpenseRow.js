@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Calendar from './Calendar';
 import './styles/ExpenseRow.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -62,18 +61,7 @@ export default class Expense extends Component {
   };
 
   render() {
-    const {
-      time,
-      id,
-      expense_name,
-      price,
-      category,
-      paid_to,
-      toggleEditOn,
-      startDate,
-      setCalendar,
-      
-    } = this.props;
+    const { id } = this.props;
 
     return (
       <tr className="expense-row">
