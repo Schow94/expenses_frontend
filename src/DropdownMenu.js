@@ -11,6 +11,7 @@ export default class DropdownMenu extends Component {
       <div className="menu">
         <ul className="menu-list">
           <li className="menu-list-item">Account Info</li>
+
           <hr></hr>
 
           <li onClick={this.handleShowIncomeForm} className="menu-list-item">

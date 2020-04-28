@@ -133,91 +133,6 @@ td {
   padding-bottom: 2em;
 }
 
-.menu {
-  width: 300px;
-  height: 400px;
-  background-color: #fafafa;
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-top: 0.1%;
-  margin-right: 0.1%;
-  /* border: 1px solid grey; */
-  border-radius: 10px;
-  z-index: 5;
-}
-
-.menu-list {
-  width: 80%;
-  padding: 0;
-}
-.menu-list:hover {
-  cursor: pointer;
-}
-
-.menu-list-item {
-  list-style-type: none;
-  margin-left: 10%;
-  margin-top: 1.3em;
-  padding: 1em;
-}
-
-.menu-list-item:hover {
-  background-color: grey;
-}
-
-.income-container {
-  background-color: #f0f3f5;
-  border-radius: 5px;
-  width: 80%;
-  height: 400px;
-  margin-top: 1em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.add-income-form {
-  margin-top: 2em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.add-income-input {
-  border: none;
-  border-radius: 5px;
-  font-size: 1em;
-  padding: 0.7em;
-  margin-bottom: 1em;
-  width: 30%;
-}
-
-.update-income-btn {
-  margin-top: 1em;
-  width: 150px;
-  height: 50px;
-  border-radius: 5px;
-  border: none;
-  background-color: #00ed18;
-  font-size: 1em;
-}
-
-.update-income-btn:hover {
-  background-color: #02cc16;
-}
-
-.cancel-btn {
-  margin-top: 1em;
-  width: 150px;
-  height: 50px;
-  border-radius: 5px;
-  border: none;
-  background-color: orange;
-  font-size: 1em;
-}
-
 button:hover {
   color: white;
   cursor: pointer;
@@ -239,6 +154,34 @@ button:hover {
 .csv-button:hover {
   color: white;
   background-color: #1db0d1;
+}
+
+.import-toggle-btn {
+  width: 150px;
+  height: 65px;
+  font-size: 16px;
+  background-color: #059c00;
+  letter-spacing: 1px;
+  color: black;
+}
+
+.import-toggle-btn:hover {
+  color: white;
+  background-color: #048100;
+}
+
+.go-back-btn {
+  width: 150px;
+  height: 65px;
+  font-size: 16px;
+  background-color: orange;
+  letter-spacing: 1px;
+  color: black;
+}
+
+.go-back-btn:hover {
+  color: white;
+  background-color: rgb(228, 148, 1);
 }
 
 /* ------------------------------ MEDIA QUERIES ------------------------------- */
@@ -327,55 +270,7 @@ button:hover {
     width: 70%;
     margin-left: 10%;
   }
-  .menu {
-    width: 40%;
-    height: 280px;
-    margin-top: 0.5%;
-    margin-right: 0.5%;
-    z-index: 5;
-  }
 
-  .menu-list {
-    width: 80%;
-    padding: 0;
-  }
-
-  .income-container {
-    border-radius: 5px;
-    width: 80%;
-    height: 200px;
-    margin-top: 1em;
-  }
-
-  .add-income-form {
-    margin-top: 2em;
-    width: 100%;
-  }
-
-  .add-income-input {
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    padding: 0.7em;
-    margin-bottom: 2em;
-    width: 70%;
-  }
-
-  .update-income-btn {
-    margin-top: 1em;
-    width: 100px;
-    height: 35px;
-    border-radius: 5px;
-    font-size: 1em;
-  }
-
-  .cancel-btn {
-    margin-top: 1em;
-    width: 100px;
-    height: 35px;
-    border-radius: 5px;
-    font-size: 1em;
-  }
   .csv-button {
     width: 100px;
     border-radius: 5px;
@@ -472,57 +367,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     width: 60%;
-    margin-left: 25%;
-  }
-
-  .menu {
-    width: 40%;
-    height: 320px;
-    margin-top: 0.5%;
-    margin-right: 0.5%;
-    z-index: 5;
-  }
-
-  .menu-list {
-    width: 80%;
-    padding: 0;
-  }
-  .income-container {
-    border-radius: 5px;
-    width: 80%;
-    height: 200px;
-    margin-top: 2em;
-    padding-bottom: 2em;
-  }
-
-  .add-income-form {
-    margin-top: 2em;
-    width: 100%;
-  }
-
-  .add-income-input {
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    padding: 0.7em;
-    margin-bottom: 2em;
-    width: 70%;
-  }
-
-  .update-income-btn {
-    margin-top: 1em;
-    width: 100px;
-    height: 40px;
-    border-radius: 5px;
-    font-size: 1em;
-  }
-
-  .cancel-btn {
-    margin-top: 1em;
-    width: 100px;
-    height: 40px;
-    border-radius: 5px;
-    font-size: 1em;
+    margin-left: 15%;
   }
 
   .csv-button {
@@ -621,7 +466,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     width: 50%;
-    margin-left: 30%;
+    margin-left: 25%;
   }
   .csv-button {
     width: 130px;
@@ -734,7 +579,7 @@ button:hover {
 
 @media only screen and (min-width: 800px) and (max-width: 1000px) {
   .expenses-container {
-    margin-top: 8.5%;
+    margin-top: 6.8%;
     margin-bottom: 1em;
     padding-bottom: 2em;
     font-size: 14px;
@@ -759,7 +604,6 @@ button:hover {
     padding-right: 15%;
     margin-right: 1em;
     margin-left: 2%;
-    /* background-color: blue; */
   }
 
   .graph-table-container {
@@ -837,7 +681,7 @@ button:hover {
 
 @media only screen and (min-width: 1000px) and (max-width: 1300px) {
   .expenses-container {
-    margin-top: 8.5%;
+    margin-top: 5.2%;
     margin-bottom: 1em;
     padding-bottom: 2em;
     font-size: 14px;
@@ -938,7 +782,7 @@ button:hover {
 
 @media only screen and (min-width: 1300px) and (max-width: 1500px) {
   .expenses-container {
-    margin-top: 8.5%;
+    margin-top: 4.5%;
     margin-bottom: 1em;
     padding-bottom: 2em;
     font-size: 16px;
@@ -1039,7 +883,7 @@ button:hover {
 
 @media only screen and (min-width: 1500px) {
   .expenses-container {
-    margin-top: 8.5%;
+    margin-top: 3.5%;
     margin-bottom: 1em;
     padding-bottom: 2em;
     font-size: 18px;
@@ -1114,7 +958,7 @@ button:hover {
     border: 1px solid black;
   }
   .toggle-add-expense-btn {
-    width: 110px;
+    width: 170px;
     height: 4em;
     font-size: 1em;
     margin-top: 1em;

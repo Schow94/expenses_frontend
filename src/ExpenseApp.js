@@ -47,6 +47,7 @@ export default class ExpenseApp extends Component {
       searchResults: [],
       csvData: [],
       isLoading: false,
+      showImportForm: false,
     };
   }
 
@@ -721,6 +722,17 @@ export default class ExpenseApp extends Component {
     });
   };
 
+  toggleShowImportForm = () => {
+    this.setState(
+      {
+        showImportForm: !this.state.showImportForm,
+      },
+      () => {
+        console.log(this.state.showImportForm);
+      }
+    );
+  };
+
   render() {
     return (
       <>
@@ -776,6 +788,8 @@ export default class ExpenseApp extends Component {
             currentUser={this.state.currentUser}
             csvData={this.state.csvData}
             getAllExpenses={this.getAllExpenses}
+            toggleShowImportForm={this.toggleShowImportForm}
+            showImportForm={this.state.showImportForm}
           />
         ) : (
           <>

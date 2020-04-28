@@ -24,6 +24,10 @@ export default class Expenses extends Component {
 
   componentDidUpdate() {}
 
+  handleImportToggleClick = () => {
+    this.props.toggleShowImportForm();
+  };
+
   render() {
     const {
       expenses,
@@ -64,6 +68,7 @@ export default class Expenses extends Component {
       currentUser,
       csvData,
       getAllExpenses,
+      showImportForm,
     } = this.props;
 
     //Move this logic to ExpenseApp.js state
@@ -139,7 +144,14 @@ export default class Expenses extends Component {
         />
         <SearchResults searchTerm={searchTerm} searchResults={searchResults} />
 
-        <Upload getAllExpenses={getAllExpenses} />
+        {showImportForm ? <Upload getAllExpenses={getAllExpenses} /> : null}
+
+        <button
+          className={showImportForm ? 'go-back-btn' : 'import-toggle-btn'}
+          onClick={this.handleImportToggleClick}
+        >
+          {showImportForm ? 'Go Back' : 'Import a CSV'}
+        </button>
 
         {showIncomeForm ? (
           <AddIncomeForm

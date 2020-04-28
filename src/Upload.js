@@ -174,12 +174,17 @@ export default class Upload extends Component {
   renderActions() {
     // if files uploaded successfully, clear files arr/cache in state
     if (this.state.successfullUploaded) {
-      return <button onClick={this.clearFiles}>Clear</button>;
+      return (
+        <button className="clear-btn" onClick={this.clearFiles}>
+          Clear
+        </button>
+      );
     }
     //If files not uploaded successfully yet, send files to server
     else {
       return (
         <button
+          className="upload-btn"
           //Disable button if files are uploading or theres no files to upload yet
           disabled={this.state.files.length < 0 || this.state.uploading}
           // Clicking button triggers upload to server
@@ -196,24 +201,50 @@ export default class Upload extends Component {
       <div className="Upload">
         <span className="Title">Upload Files</span>
 
-        <div className="Content">
-          <div>
-            <Dropzone
-              onFilesAdded={this.onFilesAdded}
-              disabled={this.state.uploading || this.state.successfullUploaded}
-            />
+        <div className="upload-container">
+          <div className="import-instructions">
+            <div className="import-title">
+              <h3>CSV Import Instructions</h3>
+              <hr></hr>
+            </div>
+            <ul className="import-list">
+              <li className="import-list-item">File types accepted: CSV</li>
+              <li className="import-list-item">
+                Must have 5 columns: Expense, Price, Category, Paid To, Date, in
+                that order
+              </li>
+              <li className="import-list-item">
+                Do not use commas (,) when specifying dollar amounts. (e.g.
+                $47,000 would be input as 47000)
+              </li>
+              <li className="import-list-item">
+                Files will not upload if .csv contains incorrect characters in
+                headers or if not formatted properly
+              </li>
+            </ul>
           </div>
 
-          {/* Map through files array to display to user what they selected for upload */}
-          <div className="Files">
-            {this.state.files.map((file, i) => {
-              return (
-                <div key={i} className="Row">
-                  <span className="Filename">{file.name}</span>
-                  {this.renderProgress(file)}
-                </div>
-              );
-            })}
+          <div className="Content">
+            <div>
+              <Dropzone
+                onFilesAdded={this.onFilesAdded}
+                disabled={
+                  this.state.uploading || this.state.successfullUploaded
+                }
+              />
+            </div>
+
+            {/* Map through files array to display to user what they selected for upload */}
+            <div className="Files">
+              {this.state.files.map((file, i) => {
+                return (
+                  <div key={i} className="Row">
+                    <span className="Filename">{file.name}</span>
+                    {this.renderProgress(file)}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './styles/AddIncomeForm.css';
 
 export default class AddIncomeForm extends Component {
   handleShowIncomeForm = (e) => {
@@ -19,6 +20,11 @@ export default class AddIncomeForm extends Component {
     const { income_total } = this.props;
     return (
       <div className="income-container" onSubmit={(e) => this.handleSubmit(e)}>
+        <p className="income-instructions">
+          Please enter your yearly salary (before taxes) without any decimals,
+          or symbols (e.g. 47,793.95 would be entered as 47794)
+        </p>
+
         <form className="add-income-form">
           <input
             className="add-income-input"
