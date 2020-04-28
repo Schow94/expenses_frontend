@@ -65,7 +65,7 @@ export default class Expense extends Component {
 
     return (
       <tr className="expense-row">
-        <td>
+        <td className="datepicker-input">
           <DatePicker
             selected={this.state.startDateInput}
             onChange={this.handleDateEdit}
