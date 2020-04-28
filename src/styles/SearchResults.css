@@ -10,30 +10,55 @@
 /* ------------------------------ MEDIA QUERIES ------------------------------- */
 @media only screen and (max-width: 300px) {
   .search-results-container {
-    width: 70%;
+    width: 80%;
   }
 }
 
 @media only screen and (min-width: 300px) and (max-width: 450px) {
   .search-results-container {
-    width: 70%;
+    width: 77%;
+    margin-top: 2em;
   }
 }
 
 @media only screen and (min-width: 450px) and (max-width: 650px) {
+  .search-results-container {
+    width: 72%;
+    margin-top: 2em;
+  }
 }
 
 @media only screen and (min-width: 650px) and (max-width: 800px) {
+  .search-results-container {
+    width: 72%;
+    margin-top: 2em;
+  }
 }
 
 @media only screen and (min-width: 800px) and (max-width: 1000px) {
+  .search-results-container {
+    width: 71%;
+    margin-top: 2em;
+  }
 }
 
 @media only screen and (min-width: 1000px) and (max-width: 1300px) {
+  .search-results-container {
+    width: 69%;
+    margin-top: 2em;
+  }
 }
 
 @media only screen and (min-width: 1300px) and (max-width: 1500px) {
+  .search-results-container {
+    width: 69%;
+    margin-top: 2em;
+  }
 }
 
 @media only screen and (min-width: 1500px) {
+  .search-results-container {
+    width: 68.5%;
+    margin-top: 2em;
+  }
 }

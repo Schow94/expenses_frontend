@@ -229,7 +229,7 @@ export default class Upload extends Component {
           </div>
 
           <div className="Content">
-            <div>
+            <div className="dropzone-container">
               <Dropzone
                 onFilesAdded={this.onFilesAdded}
                 disabled={

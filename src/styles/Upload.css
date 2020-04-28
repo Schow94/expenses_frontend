@@ -108,3 +108,210 @@
   list-style-type: circle;
   font-size: 14px;
 }
+
+/* ------------------------------ MEDIA QUERIES ------------------------------- */
+@media only screen and (max-width: 300px) {
+  .upload-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    font-size: 1em;
+  }
+
+  .import-list-item {
+    line-height: 2.5em;
+    list-style-type: circle;
+    font-size: 10px;
+  }
+
+  .Upload {
+    margin-top: 3em;
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 450px) {
+  .upload-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    font-size: 1em;
+  }
+
+  .Upload {
+    margin-top: 3em;
+  }
+
+  .import-list-item {
+    line-height: 2.5em;
+    list-style-type: circle;
+    font-size: 11px;
+  }
+  .Actions {
+    flex: 1;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2em;
+  }
+}
+
+@media only screen and (min-width: 450px) and (max-width: 650px) {
+  .upload-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    font-size: 1.2em;
+  }
+  .import-list-item {
+    line-height: 2.5em;
+    list-style-type: circle;
+    font-size: 12px;
+  }
+  .Actions {
+    flex: 1;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2em;
+  }
+  .Upload {
+    margin-top: 3em;
+  }
+}
+
+@media only screen and (min-width: 650px) and (max-width: 800px) {
+  .upload-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    font-size: 1.3em;
+  }
+  .import-list-item {
+    line-height: 2.5em;
+    list-style-type: circle;
+    font-size: 13px;
+  }
+  .Actions {
+    flex: 1;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2em;
+  }
+  .Upload {
+    margin-top: 3em;
+  }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1000px) {
+  .upload-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    font-size: 1.3em;
+  }
+  .import-list-item {
+    line-height: 2.5em;
+    list-style-type: circle;
+    font-size: 13px;
+  }
+  .Actions {
+    flex: 1;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2em;
+  }
+  .Upload {
+    margin-top: 3em;
+  }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1300px) {
+  .upload-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    font-size: 1.3em;
+  }
+  .import-list-item {
+    line-height: 2.5em;
+    list-style-type: circle;
+    font-size: 13px;
+  }
+  .Actions {
+    flex: 1;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2em;
+  }
+  .Upload {
+    margin-top: 3em;
+  }
+}
+
+@media only screen and (min-width: 1300px) and (max-width: 1500px) {
+  .upload-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    font-size: 1.3em;
+  }
+  .import-list-item {
+    line-height: 2.5em;
+    list-style-type: circle;
+    font-size: 15px;
+  }
+  .Actions {
+    flex: 1;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2em;
+  }
+  .Upload {
+    margin-top: 3em;
+  }
+}
+
+@media only screen and (min-width: 1500px) {
+  .upload-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    font-size: 1.3em;
+  }
+  .import-list-item {
+    line-height: 3.1em;
+    list-style-type: circle;
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
+  .Actions {
+    flex: 1;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2em;
+  }
+  .Upload {
+    margin-top: 3em;
+  }
+}

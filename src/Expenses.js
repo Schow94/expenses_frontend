@@ -122,6 +122,11 @@ export default class Expenses extends Component {
       'black',
       '#19f78c',
       'pink',
+      '#bab400',
+      '#d705f7',
+      '#f76205',
+      '#05f7cf',
+      '#0576f7',
     ];
 
     // console.log(catArr);

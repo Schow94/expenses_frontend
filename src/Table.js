@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import ExpenseRow from './ExpenseRow';
+import './styles/Table.css';
 
 export default class Table extends Component {
   render() {

@@ -10,30 +10,6 @@
   z-index: -2;
 }
 
-table {
-  margin-top: 5em;
-  width: 100%;
-  font-size: 12px;
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-.table-header {
-  font-size: 1.4em;
-}
-
-th {
-  padding: 0.6em;
-  border: 1px solid black;
-  background-color: grey;
-}
-
-td {
-  padding: 0.6em;
-  font-size: 1.4em;
-  border: 1px solid black;
-}
-
 .expenses-title {
   text-align: center;
   margin-top: 2em;
@@ -216,40 +192,17 @@ button:hover {
     margin-bottom: 2em;
   }
   .edit-container {
-    width: 100%;
+    width: 95%;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-left: 2.5%;
   }
 
   .graph-table-container {
     width: 100vw;
   }
 
-  table {
-    margin-top: 30px;
-    width: 100%;
-    font-size: 1px;
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
-
-  tr {
-  }
-  .table-header {
-    font-size: 1.4em;
-  }
-
-  th {
-    border: 1px solid black;
-    background-color: grey;
-  }
-
-  td {
-    font-size: 1em;
-    padding: 0;
-    border: 1px solid black;
-  }
   .toggle-add-expense-btn {
     width: 55px;
     height: 3.5em;
@@ -313,41 +266,17 @@ button:hover {
     margin-bottom: 2em;
   }
   .edit-container {
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-left: 5%;
   }
 
   .graph-table-container {
     width: 100vw;
   }
 
-  table {
-    margin-top: 30px;
-    width: 100%;
-    font-size: 1px;
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
-
-  tr {
-  }
-
-  .table-header {
-    font-size: 1.4em;
-  }
-
-  th {
-    border: 1px solid black;
-    background-color: grey;
-  }
-
-  td {
-    font-size: 1em;
-    padding: 0;
-    border: 1px solid black;
-  }
   .toggle-add-expense-btn {
     width: 95px;
     height: 4em;
@@ -412,41 +341,17 @@ button:hover {
     margin-bottom: 2em;
   }
   .edit-container {
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-left: 5%;
   }
 
   .graph-table-container {
     width: 100vw;
   }
 
-  table {
-    margin-top: 30px;
-    width: 80%;
-    font-size: 8px;
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
-
-  tr {
-  }
-
-  .table-header {
-    font-size: 1.4em;
-  }
-
-  th {
-    border: 1px solid black;
-    background-color: grey;
-  }
-
-  td {
-    font-size: 10px;
-    padding: 0;
-    border: 1px solid black;
-  }
   .toggle-add-expense-btn {
     width: 95px;
     height: 4em;
@@ -510,7 +415,8 @@ button:hover {
     margin-bottom: 2em;
   }
   .edit-container {
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -520,31 +426,6 @@ button:hover {
     width: 100vw;
   }
 
-  table {
-    margin-top: 30px;
-    width: 80%;
-    font-size: 8px;
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
-
-  tr {
-  }
-
-  .table-header {
-    font-size: 1.4em;
-  }
-
-  th {
-    border: 1px solid black;
-    background-color: grey;
-  }
-
-  td {
-    font-size: 10px;
-    padding: 0;
-    border: 1px solid black;
-  }
   .toggle-add-expense-btn {
     width: 110px;
     height: 4em;
@@ -612,7 +493,8 @@ button:hover {
   }
 
   .edit-container {
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -629,31 +511,6 @@ button:hover {
     margin-top: 2em;
   }
 
-  table {
-    margin-top: 5%;
-    width: 80%;
-    font-size: 12px;
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
-
-  tr {
-  }
-
-  .table-header {
-    font-size: 1.4em;
-  }
-
-  th {
-    border: 1px solid black;
-    background-color: grey;
-  }
-
-  td {
-    font-size: 10px;
-    padding: 0;
-    border: 1px solid black;
-  }
   .toggle-add-expense-btn {
     width: 110px;
     height: 4em;
@@ -713,7 +570,8 @@ button:hover {
   }
 
   .edit-container {
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -730,31 +588,6 @@ button:hover {
     margin-top: 2em;
   }
 
-  table {
-    margin-top: 5%;
-    width: 80%;
-    font-size: 12px;
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
-
-  tr {
-  }
-
-  .table-header {
-    font-size: 1.4em;
-  }
-
-  th {
-    border: 1px solid black;
-    background-color: grey;
-  }
-
-  td {
-    font-size: 10px;
-    padding: 0;
-    border: 1px solid black;
-  }
   .toggle-add-expense-btn {
     width: 110px;
     height: 4em;
@@ -798,29 +631,13 @@ button:hover {
   }
 
   .edit-container {
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
     display: flex;
     flex-direction: row;
     justify-content: center;
   }
 
-  tr {
-  }
-
-  .table-header {
-    font-size: 1.4em;
-  }
-
-  th {
-    border: 1px solid black;
-    background-color: grey;
-  }
-
-  td {
-    font-size: 10px;
-    padding: 0;
-    border: 1px solid black;
-  }
   .toggle-add-expense-btn {
     width: 110px;
     height: 4em;
@@ -850,14 +667,6 @@ button:hover {
     font-size: 1.1em;
     line-height: 2em;
     margin-left: 8%;
-  }
-
-  table {
-    margin-top: 5%;
-    width: 80%;
-    font-size: 12px;
-    border: 1px solid black;
-    border-collapse: collapse;
   }
   .graph-container {
     width: 80%;
@@ -911,13 +720,6 @@ button:hover {
     padding-bottom: 2em;
   }
 
-  table {
-    margin-top: 5%;
-    width: 80%;
-    font-size: 12px;
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
   .graph-container {
     width: 80%;
     margin-left: 5%;
@@ -934,29 +736,13 @@ button:hover {
   }
 
   .edit-container {
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
     display: flex;
     flex-direction: row;
     justify-content: center;
   }
 
-  tr {
-  }
-
-  .table-header {
-    font-size: 1.4em;
-  }
-
-  th {
-    border: 1px solid black;
-    background-color: grey;
-  }
-
-  td {
-    font-size: 10px;
-    padding: 0;
-    border: 1px solid black;
-  }
   .toggle-add-expense-btn {
     width: 170px;
     height: 4em;
