@@ -3,6 +3,8 @@ import Dropzone from './Dropzone';
 import './styles/Upload.css';
 import Progress from './Progress';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default class Upload extends Component {
   constructor(props) {
     super(props);
@@ -127,7 +129,9 @@ export default class Upload extends Component {
 
       //Creates a new or pre-existing POST request
 
-      XHR.open('POST', 'http://localhost:5000/expenses/upload');
+      // XHR.open('POST', 'http://localhost:5000/expenses/upload');
+      XHR.open('POST', `${API_URL}/expenses/upload`);
+
       //token is not being attached properly
       XHR.setRequestHeader('Authorization', 'Bearer ' + token);
 
