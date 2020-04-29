@@ -60,6 +60,9 @@ export default class ExpenseApp extends Component {
         this.getAllExpenses();
         this.getIncome();
         this.hasLoaded();
+      } else {
+        console.log('No token present');
+        this.wakeupHeroku();
       }
     } catch (e) {
       console.log(e);
@@ -71,6 +74,14 @@ export default class ExpenseApp extends Component {
   }
 
   componentWillUnmount() {}
+
+  wakeupHeroku = async () => {
+    const result = await axios({
+      method: 'get',
+      url: `${API_URL}/landing`,
+    });
+    console.log(result);
+  };
 
   getCurrentUser = () => {
     try {

@@ -74,9 +74,11 @@ tr:hover {
   }
   .datepicker-input input {
     width: 85%;
-    height: 21px;
+    height: 22px;
     font-size: 7px;
     text-align: center;
+    border: none;
+    border-radius: 0;
   }
 }
 
@@ -105,10 +107,12 @@ tr:hover {
   }
 
   .datepicker-input input {
-    width: 90%;
-    height: 21px;
+    width: 95%;
+    height: 23px;
     font-size: 10px;
     text-align: center;
+    border: none;
+    border-radius: 0;
   }
 }
 
@@ -298,12 +302,6 @@ tr:hover {
     border-radius: 3px;
     padding: 0;
     border: none;
-  }
-  .datepicker-input input {
-    width: 97%;
-    height: 51px;
-    font-size: 16px;
-    text-align: center;
   }
   .datepicker-input input {
     width: 97%;
