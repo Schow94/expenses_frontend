@@ -155,7 +155,7 @@ export default class Expenses extends Component {
           className={showImportForm ? 'go-back-btn' : 'import-toggle-btn'}
           onClick={this.handleImportToggleClick}
         >
-          {showImportForm ? 'Go Back' : 'Import a CSV'}
+          {showImportForm ? 'Close Uploader' : 'Import a CSV'}
         </button>
 
         {showIncomeForm ? (
