@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 import axios from 'axios';
 import jwt from 'jwt-decode';
+
+import { getCurrentUser, logout, getAllExpenses } from './actions';
 
 import Expenses from './Expenses';
 import Login from './Login';
@@ -16,22 +18,12 @@ import './styles/Dashboard.css';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      email: '',
-      username: '',
-      password: '',
       allExpenses: [],
-      expenses: [],
-      currentUser: '',
-      startDate: new Date(),
-      expense_name: '',
-      price: '',
-      category: '',
-      paid_to: '',
       graphData: [],
       toggleAddExpense: false,
       toggleEditOn: false,
@@ -58,8 +50,8 @@ export default class Dashboard extends Component {
     try {
       const token = JSON.parse(localStorage.getItem('token'));
       if (token) {
-        this.getCurrentUser();
-        this.getAllExpenses();
+        this.props.getCurrentUser();
+        this.props.getAllExpenses();
         this.getIncome();
         this.hasLoaded();
       } else {
@@ -73,6 +65,7 @@ export default class Dashboard extends Component {
 
   componentDidUpdate() {
     console.log('Component Updated');
+    // this.props.getCurrentUser();
   }
 
   componentWillUnmount() {}
@@ -85,86 +78,86 @@ export default class Dashboard extends Component {
     console.log(result);
   };
 
-  getCurrentUser = () => {
-    try {
-      const token = JSON.parse(localStorage.getItem('token'));
-      if (token) {
-        const decodedToken = jwt(token);
-        const decodedUser = decodedToken.username;
-        const expireDate = decodedToken.exp;
-        const currentTime = Date.now() / 1000;
+  // getCurrentUser = () => {
+  //   try {
+  //     const token = JSON.parse(localStorage.getItem('token'));
+  //     if (token) {
+  //       const decodedToken = jwt(token);
+  //       const decodedUser = decodedToken.username;
+  //       const expireDate = decodedToken.exp;
+  //       const currentTime = Date.now() / 1000;
 
-        //If token is expired, remove token from localstorage & set
-        //currentUser to ''
-        if (expireDate < currentTime) {
-          this.logout();
-        } else {
-          this.setState({
-            currentUser: decodedUser,
-          });
-        }
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  //       //If token is expired, remove token from localstorage & set
+  //       //currentUser to ''
+  //       if (expireDate < currentTime) {
+  //         this.logout();
+  //       } else {
+  //         this.setState({
+  //           currentUser: decodedUser,
+  //         });
+  //       }
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   handleFormChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  getAllExpenses = async () => {
-    try {
-      const token = JSON.parse(localStorage.getItem('token'));
+  // getAllExpenses = async () => {
+  //   try {
+  //     const token = JSON.parse(localStorage.getItem('token'));
 
-      //Data from API
-      const result = await axios({
-        method: 'get',
-        url: `${API_URL}/expenses`,
-        headers: { Authorization: `Bearer ${token}` },
-      });
+  //     //Data from API
+  //     const result = await axios({
+  //       method: 'get',
+  //       url: `${API_URL}/expenses`,
+  //       headers: { Authorization: `Bearer ${token}` },
+  //     });
 
-      // Save prices for graphs
-      const prices = result.data.map((val) => {
-        const obj = {};
-        const date = new Date(val.expense_date * 1000);
+  //     // Save prices for graphs
+  //     const prices = result.data.map((val) => {
+  //       const obj = {};
+  //       const date = new Date(val.expense_date * 1000);
 
-        obj['price'] = Number(val.price);
-        obj['date'] = `${date}`.slice(0, 15);
-        return obj;
-      });
+  //       obj['price'] = Number(val.price);
+  //       obj['date'] = `${date}`.slice(0, 15);
+  //       return obj;
+  //     });
 
-      //Format data to be saved to CSV
-      const csvData = result.data.map((val) => {
-        let obj = {};
-        let dateObj = new Date(val.expense_date * 1000);
-        let year = dateObj.getFullYear().toString();
-        let month = (dateObj.getMonth() + 1).toString();
-        let day = dateObj.getDate().toString();
+  //     //Format data to be saved to CSV
+  //     const csvData = result.data.map((val) => {
+  //       let obj = {};
+  //       let dateObj = new Date(val.expense_date * 1000);
+  //       let year = dateObj.getFullYear().toString();
+  //       let month = (dateObj.getMonth() + 1).toString();
+  //       let day = dateObj.getDate().toString();
 
-        obj['expense_name'] = val.expense_name;
-        obj['price'] = val.price;
-        obj['category'] = val.category;
-        obj['paid_to'] = val.paid_to;
-        obj['expense_date'] = `${month}-${day}-${year}`;
+  //       obj['expense_name'] = val.expense_name;
+  //       obj['price'] = val.price;
+  //       obj['category'] = val.category;
+  //       obj['paid_to'] = val.paid_to;
+  //       obj['expense_date'] = `${month}-${day}-${year}`;
 
-        return obj;
-      });
+  //       return obj;
+  //     });
 
-      this.setState(
-        {
-          csvData: csvData,
-          graphData: [...prices],
-          expenses: [...result.data],
-          allExpenses: [...result.data],
-          startDate: new Date(),
-        },
-        this.hasLoaded()
-      );
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  //     this.setState(
+  //       {
+  //         csvData: csvData,
+  //         graphData: [...prices],
+  //         expenses: [...result.data],
+  //         allExpenses: [...result.data],
+  //         startDate: new Date(),
+  //       },
+  //       this.hasLoaded()
+  //     );
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   //Get all expenses for a particular year
   getYearExpenses = async (year) => {
@@ -334,100 +327,59 @@ export default class Dashboard extends Component {
     }
   };
 
-  clearLoginForm = () => {
-    console.log('clearLoginForm');
-    this.setState({
-      username: '',
-      password: '',
-    });
-  };
+  // login = async () => {
+  //   console.log('logggin in');
+  //   try {
+  //     const result = await axios({
+  //       method: 'post',
+  //       url: `${API_URL}/users/login`,
+  //       data: {
+  //         username: this.state.username,
+  //         password: this.state.password,
+  //       },
+  //     });
 
-  login = async () => {
-    console.log('logggin in');
-    try {
-      const result = await axios({
-        method: 'post',
-        url: `${API_URL}/users/login`,
-        data: {
-          username: this.state.username,
-          password: this.state.password,
-        },
-      });
+  //     const token = result.data.token;
+  //     localStorage.setItem('token', JSON.stringify(token));
 
-      const token = result.data.token;
-      localStorage.setItem('token', JSON.stringify(token));
+  //     //Get expenses/currentUser after loggin in
+  //     this.getCurrentUser();
+  //     this.getAllExpenses();
+  //     this.getIncome();
+  //     // this.clearLoginForm();
 
-      //Get expenses/currentUser after loggin in
-      this.getCurrentUser();
-      this.getAllExpenses();
-      this.getIncome();
-      // this.clearLoginForm();
+  //     const loginErr = result['data']['message'];
+  //     if (loginErr) {
+  //       console.log('Theres a login err');
+  //       this.setState({
+  //         loginError: loginErr,
+  //         // username: '',
+  //         // password: '',
+  //       });
+  //     } else {
+  //       // Use username/password state only for handling input
+  //       console.log('There are no login errors');
+  //       this.setState({
+  //         loginError: '',
+  //         username: '',
+  //         password: '',
+  //       });
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
-      const loginErr = result['data']['message'];
-      if (loginErr) {
-        console.log('Theres a login err');
-        this.setState({
-          loginError: loginErr,
-          // username: '',
-          // password: '',
-        });
-      } else {
-        // Use username/password state only for handling input
-        console.log('There are no login errors');
-        this.setState({
-          loginError: '',
-          username: '',
-          password: '',
-        });
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // logout = () => {
+  //   this.setState({
+  //     // currentUser: '',
+  //     toggleAddExpense: false,
+  //   });
+  //   localStorage.removeItem('token');
 
-  logout = () => {
-    this.setState({
-      currentUser: '',
-      toggleAddExpense: false,
-    });
-    localStorage.removeItem('token');
-
-    //Will clear the expenses since invalid credentials
-    this.getAllExpenses();
-  };
-
-  addExpense = async () => {
-    try {
-      const token = JSON.parse(localStorage.getItem('token'));
-
-      const result = await axios({
-        method: 'post',
-        url: `${API_URL}/expenses`,
-        data: {
-          expense_name: this.state.expense_name,
-          price: this.state.price,
-          category: this.state.category,
-          paid_to: this.state.paid_to,
-          expense_date: this.state.startDate.getTime() / 1000,
-        },
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      this.getAllExpenses();
-
-      //Clear inputs after adding expense
-      this.setState({
-        toggleAddExpense: false,
-        expense_name: '',
-        price: '',
-        category: '',
-        paid_to: '',
-        startDate: '',
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  //   //Will clear the expenses since invalid credentials
+  //   // this.getAllExpenses();
+  // };
 
   //Make API call to create an account
   createAccount = async () => {
@@ -447,19 +399,13 @@ export default class Dashboard extends Component {
     localStorage.setItem('token', JSON.stringify(token));
 
     //Get expenses/currentUser after loggin in
-    this.getCurrentUser();
-    this.getAllExpenses();
+    this.props.getCurrentUser();
+    // this.getAllExpenses();
 
     this.setState({
       emai: '',
       username: '',
       password: '',
-    });
-  };
-
-  setCalendar = (date) => {
-    this.setState({
-      startDate: date,
     });
   };
 
@@ -474,22 +420,6 @@ export default class Dashboard extends Component {
     });
   };
 
-  deleteExpense = async (expenseId) => {
-    try {
-      const token = JSON.parse(localStorage.getItem('token'));
-
-      const result = await axios({
-        method: 'delete',
-        url: `${API_URL}/expenses/${expenseId}`,
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      this.getAllExpenses();
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   toggleAddForm = () => {
     this.setState({
       toggleAddExpense: !this.state.toggleAddExpense,
@@ -500,115 +430,6 @@ export default class Dashboard extends Component {
     this.setState({
       toggleEditOn: !this.state.toggleEditOn,
     });
-  };
-
-  //EDIT EXPENSE NAME
-  editExpenseName = async (expenseId, expenseName) => {
-    try {
-      const token = JSON.parse(localStorage.getItem('token'));
-
-      const result = await axios({
-        method: 'patch',
-        url: `${API_URL}/expenses/${expenseId}`,
-        data: {
-          expense_name: expenseName,
-        },
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      this.getAllExpenses();
-
-      //Clear inputs after adding expense
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  editExpensePrice = async (expenseId, price) => {
-    try {
-      const token = JSON.parse(localStorage.getItem('token'));
-
-      const result = await axios({
-        method: 'patch',
-        url: `${API_URL}/expenses/${expenseId}`,
-        data: {
-          price: price,
-        },
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      this.getAllExpenses();
-
-      //Clear inputs after adding expense
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  editExpenseCategory = async (expenseId, category) => {
-    try {
-      const token = JSON.parse(localStorage.getItem('token'));
-
-      const result = await axios({
-        method: 'patch',
-        url: `${API_URL}/expenses/${expenseId}`,
-        data: {
-          category: category,
-        },
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      this.getAllExpenses();
-
-      //Clear inputs after adding expense
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  editExpensePaidTo = async (expenseId, paid_to) => {
-    try {
-      const token = JSON.parse(localStorage.getItem('token'));
-
-      const result = await axios({
-        method: 'patch',
-        url: `${API_URL}/expenses/${expenseId}`,
-        data: {
-          paid_to: paid_to,
-        },
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      this.getAllExpenses();
-
-      //Clear inputs after adding expense
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  //This code is not executing
-  editExpenseDate = async (expenseId, time) => {
-    //Time is correct up here
-    try {
-      const token = JSON.parse(localStorage.getItem('token'));
-
-      //Something is getting blocked here
-      const result = await axios({
-        method: 'patch',
-        url: `${API_URL}/expenses/${expenseId}`,
-        data: {
-          expense_date: time.getTime() / 1000,
-        },
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      this.getAllExpenses();
-
-      //Clear inputs after adding expense
-    } catch (e) {
-      console.log(e);
-    }
   };
 
   toggleDropdownMenu = () => {
@@ -820,23 +641,20 @@ export default class Dashboard extends Component {
     return (
       <>
         <Navbar
-          currentUser={this.state.currentUser}
-          logout={this.logout}
+          currentUser={this.props.auth.currentUser}
+          logout={this.props.logout}
           toggleDropdownMenu={this.toggleDropdownMenu}
         />
 
         {this.state.isLoading ? (
           <Spinner />
-        ) : this.state.currentUser ? (
+        ) : this.props.auth.currentUser ? (
           //   <Expenses
           //     // contentCached={contentCached}
           //     // updateAvailable={updateAvailable}
           //     expenses={this.state.expenses}
           //     allExpenses={this.state.allExpenses}
           //     handleFormChange={this.handleFormChange}
-          //     addExpense={this.addExpense}
-          //     startDate={this.state.startDate}
-          //     setCalendar={this.setCalendar}
           //     expense_name={this.state.expense_name}
           //     price={this.state.price}
           //     category={this.state.category}
@@ -903,12 +721,12 @@ export default class Dashboard extends Component {
               <Login
                 loginError={this.state.loginError}
                 clearLoginErr={this.clearLoginErr}
-                login={this.login}
+                // login={this.login}
                 handleLogin={this.handleFormChange}
                 loading={this.loading}
                 clearLoginForm={this.clearLoginForm}
-                username={this.state.username}
-                password={this.state.password}
+                // username={this.state.username}
+                // password={this.state.password}
               />
             ) : this.state.showSignupForm ? (
               <SignUp
@@ -928,3 +746,16 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+    expenses: state.expenses,
+  };
+};
+
+export default connect(mapStateToProps, {
+  getCurrentUser,
+  logout,
+  getAllExpenses,
+})(Dashboard);

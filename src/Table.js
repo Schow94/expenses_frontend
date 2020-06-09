@@ -51,7 +51,6 @@ export default class Table extends Component {
                 paid_to={val.paid_to}
                 startDate={startDate}
                 setCalendar={setCalendar}
-                deleteExpense={deleteExpense}
                 handleFormChange={handleFormChange}
                 editExpenseName={editExpenseName}
                 editExpensePrice={editExpensePrice}

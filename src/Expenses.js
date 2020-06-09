@@ -14,7 +14,7 @@ import Table from './Table';
 import SearchBar from './SearchBar';
 import SearchResults from './SearchResults';
 import Upload from './Upload';
-
+import { COLORS } from './colors';
 import { ResponsiveContainer } from 'recharts';
 
 import './styles/Expenses.css';
@@ -42,11 +42,6 @@ export default class Expenses extends Component {
       deleteExpense,
       toggleAddExpense,
       toggleAddForm,
-      editExpenseName,
-      editExpensePrice,
-      editExpenseCategory,
-      editExpensePaidTo,
-      editExpenseDate,
       year,
       getYearExpenses,
       month,
@@ -107,27 +102,6 @@ export default class Expenses extends Component {
     const month_income_taxed = income_taxed / 12;
 
     const amount_left_month = month_income_taxed - totalPrice;
-
-    const COLORS = [
-      '#f714ce',
-      '#f71942',
-      'grey',
-      '#10e348',
-      'teal',
-      'blue',
-      'brown',
-      '#14bef7',
-      'orange',
-      'purple',
-      'black',
-      '#19f78c',
-      'pink',
-      '#bab400',
-      '#d705f7',
-      '#f76205',
-      '#05f7cf',
-      '#0576f7',
-    ];
 
     // console.log(catArr);
 
@@ -199,14 +173,6 @@ export default class Expenses extends Component {
             </button>
 
             <AddExpenseForm
-              setCalendar={setCalendar}
-              startDate={startDate}
-              handleFormChange={handleFormChange}
-              addExpense={addExpense}
-              expense_name={expense_name}
-              price={price}
-              category={category}
-              paid_to={paid_to}
               toggleAddExpense={toggleAddExpense}
               toggleAddForm={toggleAddForm}
             />
@@ -281,11 +247,6 @@ export default class Expenses extends Component {
               setCalendar={setCalendar}
               deleteExpense={deleteExpense}
               handleFormChange={handleFormChange}
-              editExpenseName={editExpenseName}
-              editExpensePrice={editExpensePrice}
-              editExpenseCategory={editExpenseCategory}
-              editExpensePaidTo={editExpensePaidTo}
-              editExpenseDate={editExpenseDate}
             />
           </div>
         </div>

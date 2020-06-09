@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import {
+  deleteExpense,
+  editExpenseName,
+  editExpensePrice,
+  editExpenseCategory,
+  editExpensePaidTo,
+  editExpenseDate,
+} from './actions';
+
 import './styles/ExpenseRow.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default class Expense extends Component {
+class ExpenseRow extends Component {
   constructor(props) {
     super(props);
 
@@ -17,7 +28,7 @@ export default class Expense extends Component {
   }
 
   //Delete an expens
-  handleClick = (e, expenseId) => {
+  handleDelete = (e, expenseId) => {
     e.preventDefault();
     this.props.deleteExpense(expenseId);
   };
@@ -26,7 +37,6 @@ export default class Expense extends Component {
   handleChange = (e) => {
     e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
-    // console.log(this.state.nameInput);
   };
 
   //edit name
@@ -125,7 +135,7 @@ export default class Expense extends Component {
         </td>
         <td>
           <button
-            onClick={(e) => this.handleClick(e, id)}
+            onClick={(e) => this.handleDelete(e, id)}
             className="delete-expense-btn"
           >
             Delete
@@ -135,3 +145,12 @@ export default class Expense extends Component {
     );
   }
 }
+
+export default connect(null, {
+  deleteExpense,
+  editExpenseName,
+  editExpensePrice,
+  editExpenseCategory,
+  editExpensePaidTo,
+  editExpenseDate,
+})(ExpenseRow);

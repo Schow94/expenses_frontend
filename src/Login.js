@@ -1,22 +1,48 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { login, getCurrentUser, getAllExpenses } from './actions';
+
 import './styles/Login.css';
 
-export default class Login extends Component {
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+    };
+  }
+
   handleChange = (e) => {
     e.preventDefault();
-    this.props.handleLogin(e);
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  clearForm = () => {
+    this.setState({
+      username: '',
+      password: '',
+    });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.clearLoginErr();
-    this.props.login().then(() => {
-      if (!this.props.loginError) {
-        this.props.loading();
-      }
+    this.props.login(this.state.username, this.state.password).then(() => {
+      // if (!this.props.loginError) {
+      //   this.props.loading();
+      // } else {
+      //   this.props.hasLoaded();
+      // }
+      this.props.getCurrentUser();
+      this.props.getAllExpenses();
+      this.props.hasLoaded();
     });
+    this.props.loading();
 
-    this.props.clearLoginForm();
+    // this.clearForm();
   };
 
   componentDidMount() {
@@ -45,7 +71,7 @@ export default class Login extends Component {
             type="text"
             placeholder="Username"
             name="username"
-            value={this.props.username}
+            value={this.state.username}
           ></input>
           <input
             autoComplete="off"
@@ -53,7 +79,7 @@ export default class Login extends Component {
             type="password"
             placeholder="Password"
             name="password"
-            value={this.props.password}
+            value={this.state.password}
           ></input>
           <button className="login-btn">Login</button>
         </form>
@@ -61,3 +87,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default connect(null, { login, getCurrentUser, getAllExpenses })(Login);
